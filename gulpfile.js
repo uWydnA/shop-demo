@@ -11,6 +11,7 @@ const proxy = require("http-proxy-middleware");
 
 function indexFn(end) {
     gulp.src(["src/*.html"]).pipe(gulp.dest("server")).pipe(connect.reload());
+    gulp.src(["src/json/*.json"]).pipe(gulp.dest("server/json")).pipe(connect.reload());
     gulp.src(["src/js/*.js"]).pipe(gulp.dest("server/js")).pipe(connect.reload());
     gulp.src(["src/libs/*.js"]).pipe(gulp.dest("server/libs")).pipe(connect.reload());
     // gulp.src(["src/js/index.js"]).pipe(gulp.dest("server/js")).pipe(uglify()).pipe(rename("index.min.js")).pipe(gulp.dest("server/js")).pipe(connect.reload());
@@ -19,6 +20,7 @@ function indexFn(end) {
 
 function watchFn() {
     gulp.watch(["src/*.html"], indexFn)
+    gulp.watch(["src/json/*.json"], indexFn)
     gulp.watch(["src/js/*.js"], indexFn)
     gulp.watch(["src/sass/index.scss"], sassFn);
     gulp.watch(["src/sass/login.scss"], sassFn);

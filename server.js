@@ -107,6 +107,25 @@ function ajaxHandle(req, res) {
             res.write(JSON.stringify(json));
             res.end();
         }
+        if (data.type == "findToken") {
+            let flag = 0;
+            let index;
+            let json = {};
+            if (userMsg.length >= 1) {
+                for (var i in userMsg) {
+                    if (data.token == userMsg[i].token) {
+                        flag = 1;
+                        index = i;
+                    }
+                }
+                if (flag = 1) {
+                    json.code = "21";
+                    json.msg = userMsg[index].user;
+                    res.write(JSON.stringify(json));
+                }
+            }
+            res.end();
+        }
     })
 }
 
