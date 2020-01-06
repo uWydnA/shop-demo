@@ -20,7 +20,7 @@
     }
 
     span {
-        color: #666;
+        // color: #666;
         font-family: 'Microsoft YaHei';
     }
 
@@ -120,6 +120,19 @@
                     margin-top: 13px;
                     transition: all .1s ease-in 0s;
                     -webkit-transition: all .1s ease-in 0s;
+                }
+
+                .hi {
+                    float: left;
+                }
+
+                .username {
+                    float: left;
+                    display: inline-block;
+                    max-width: 84px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
                 }
 
                 .boxi {
@@ -541,6 +554,83 @@
                     }
 
                 }
+
+                #menuData {
+                    position: absolute;
+                    top: 36px;
+                    left: 190px;
+                    z-index: 11111;
+                    background-color: #fff;
+                    transition: .5s ease-in;
+
+                    .gb-icon {
+                        display: none;
+                        width: 31px;
+                        height: 31px;
+                        cursor: pointer;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        background: url(//img.iblimg.com/respc-1/resources/v4.1/widget/nav1200/i/nav1200_sprite.png) no-repeat 0 -70px;
+                    }
+
+                    li {
+                        width: 984px;
+                        height: 416px;
+                        display: none;
+                        padding: 8px;
+                        overflow: hidden;
+                    }
+
+                    .menu_right_img {
+                        width: 240px;
+                        height: 422px;
+                        float: right;
+
+                        a {
+                            margin-bottom: 9px;
+
+                        }
+                    }
+
+                    .menu_floor {
+                        width: 725px;
+                        margin: 10px 0 0 5px;
+                        line-height: 23px;
+                        position: relative;
+                        overflow: hidden;
+
+                        span {
+                            width: 75px;
+                            font-weight: 700;
+                            float: left;
+                            margin-right: 23px;
+                            text-align: right;
+
+                            a {
+                                display: inline;
+                            }
+                        }
+
+                        .menu_floor_a {
+                            width: 620px;
+                            float: left;
+                            line-height: 23px;
+                            padding-bottom: 5px;
+                            border-bottom: 1px dashed #f3f3f3;
+
+                            a {
+                                margin-right: 18px;
+                                color: #666;
+                                display: inline-block;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
 
@@ -564,7 +654,7 @@
                 line-height: 35px;
             }
 
-            a {
+            .navlia {
                 font-weight: 700;
                 display: block;
                 height: 35px;
@@ -621,7 +711,6 @@
                 display: block;
                 background: url(//img.iblimg.com/respc-1/resources/v4.2/css/i/loading1.gif) no-repeat center center;
                 position: relative;
-
             }
         }
 
@@ -641,7 +730,7 @@
             width: 30px;
             height: 60px;
             line-height: 70px;
-            margin-left: 0;
+            margin-left: -10px;
             background-image: url(//img.iblimg.com/respc-1/resources/v4.2/css/i/bg_direction_nav.png);
             cursor: pointer;
             pointer-events: auto;
@@ -654,6 +743,7 @@
         }
 
         .next {
+            margin-right: 10px;
             display: none;
             float: right;
             width: 30px;
@@ -721,7 +811,7 @@
         height: 420px;
         margin-left: 380px;
         position: absolute;
-        left: 51%;
+        left: 50%;
         top: 5px;
         overflow: hidden;
         z-index: 12;
@@ -1182,6 +1272,124 @@
 }
 
 #footer {
-    height: 300px;
-    background-color: #99f;
+    .helpnav {
+        background: #f3f3f3;
+        min-width: 1190px;
+        padding: 24px 0;
+        clear: both;
+
+        .wrap {
+            position: relative;
+
+            .footer-center {
+                width: 1100px;
+                margin: 0 auto;
+
+                .helpnav-list {
+                    float: left;
+                    width: 200px;
+                    margin: 0 10px;
+                    display: inline-block;
+
+                    .helpnav-title {
+                        height: 40px;
+                        line-height: 40px;
+                        color: #000;
+                        font-size: 16px;
+
+                        i {
+                            display: inline-block;
+                            float: left;
+                            margin-right: 15px;
+                            width: 40px;
+                            height: 40px;
+                            overflow: hidden;
+                        }
+
+                        i.footic1 {
+                            background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/footer1200/i/footer1200_sprite.png) no-repeat 0 0;
+                        }
+                    }
+
+                    ul {
+                        margin-left: 55px;
+                        font-size: 13px;
+                        line-height: 26px;
+                        color: #555;
+                    }
+
+                    .helpnav-title i.footic2 {
+                        background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/footer1200/i/footer1200_sprite.png) no-repeat 0 -40px;
+                    }
+
+                    .helpnav-title i.footic3 {
+                        background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/footer1200/i/footer1200_sprite.png) no-repeat 0 -80px;
+                    }
+
+                    .helpnav-title i.footic4 {
+                        background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/footer1200/i/footer1200_sprite.png) no-repeat 0 -120px;
+                    }
+
+                    .helpnav-title i.footic5 {
+                        background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/footer1200/i/footer1200_sprite.png) no-repeat 0 -160px;
+                    }
+                }
+            }
+        }
+    }
+
+    .bottom-nav {
+        line-height: 24px;
+        text-align: center;
+        padding: 15px 0 0;
+        color: #999;
+        background: #f3f3f3;
+    }
+}
+
+#navigation {
+    width: 50px;
+    height: 50px;
+    float: left;
+    position: fixed;
+    right: 50%;
+    bottom: 50%;
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/css/i/barnav3.jpg) no-repeat 0 0;
+    margin-bottom: -230px;
+    left: 15%;
+
+    a {
+        width: 50px;
+        height: 49px;
+        display: block;
+
+        &:hover .box {
+            background: #ff6f6f;
+            color: #fff;
+        }
+
+        &:hover .i9 {
+            background: url(//img.iblimg.com/respc-1/resources/v4.2/css/i/bantop.png) no-repeat 0 -50px;
+        }
+
+        .box {
+            width: 30px;
+            height: 42px;
+            line-height: 16px;
+            padding: 0 10px;
+            padding-top: 7px;
+            font-family: '微软雅黑';
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .i9 {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            background: url(//img.iblimg.com/respc-1/resources/v4.2/css/i/bantop.png) no-repeat 0 0;
+            text-indent: -999px;
+        }
+    }
 }

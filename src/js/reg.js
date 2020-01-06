@@ -16,7 +16,7 @@ define([], function () {
                 this.dom.parentNode.parentNode.parentNode.children[2].children[1].style.display = "block";
             } else {
                 this.result = 1;
-                this.dom.className = "";
+                this.dom.className = "normal";
                 if (!this.flag) {
                     this.dom.parentNode.parentNode.parentNode.children[2].children[0].style.display = "none";
                 } else {

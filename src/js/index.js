@@ -7,7 +7,15 @@ require(["js/swiper", "js/getCookies", "js/ajax"], function (swiper, gc, aj) {
             this.bol = document.querySelector(".progress-bar-ol")
             this.prev = document.querySelector(".prev");
             this.next = document.querySelector(".next");
-            this.loginName = document.querySelector("#tool .tool-r ul li")
+            this.top = document.querySelector("#navigation");
+            this.remname = document.querySelector(".ban_tit_txd");
+            this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.menudata = document.querySelector("div #menuData");
+            this.topbox = document.querySelector("#navbox");
+            this.select = document.querySelector(".select");
+            this.ali = document.querySelectorAll(".selectli");
+            this.menuli = document.querySelectorAll("#menuData li")
+            this.t1;
             this.index = 0;
             this.indexPrev;
             this.cztr = document.querySelector("#main .main-czt .czt-r ul");
@@ -24,9 +32,36 @@ require(["js/swiper", "js/getCookies", "js/ajax"], function (swiper, gc, aj) {
             });
             let ajax = aj;
             ajax.init({
-                token: key
+                url: that.cztUrl,
+                data: {
+                    type: "findToken",
+                    token: key
+                }
             }).then((res) => {
-                console.log(res)
+                that.res = JSON.parse(res);
+                if (that.res.code == "21") {
+                    that.res = that.res.msg;
+                    let str = that.res.slice(0, 2);
+                    str += "**";
+                    str += that.res.slice(5, that.res.length);
+                    that.loginName.innerHTML = `
+					<a href="https://my.bl.com/ym/nl/toIndex.html" target="_blank">
+						<s class="hi">Hi，</s>
+						<span id="member_name" class ="username">${str}</span>
+					</b>
+					<a href="https://passport.bl.com/loginDisplay.html?type=logout">退出</a>
+					<b></b>
+                    `;
+                    that.remname.innerHTML = `
+                    Hi，<span id="memberName">${str}</span><br>
+                    <p class="blogin_a">
+                        <a href=";" style="display: none;">登录</a>
+                        <a href="https://reg.bl.com/regist.html" target="_blank" style="display: none;">注册</a>
+                        <a id="memberDetail">普通卡会员</a>
+                        <a id="getCoupon" href="https://coupon.bl.com/list.html" target="_blank">领券中心</a>
+                    </p>`;
+                }
+
             })
             this.getAjax(this.cztUrl, {
                 retr0: 1,
@@ -124,6 +159,54 @@ require(["js/swiper", "js/getCookies", "js/ajax"], function (swiper, gc, aj) {
             this.banner.onmouseout = function () {
                 that.prev.style.display = "none";
                 that.next.style.display = "none";
+            }
+            document.onscroll = function (eve) {
+                var e = eve || window.event;
+                var t = document.documentElement.scrollTop;
+                var l = document.documentElement.offsetHeight
+                if (t > l * 0.3) {
+                    that.top.style.display = "block";
+                } else {
+                    that.top.style.display = "none";
+                }
+            }
+            this.topbox.onclick = function (eve) {
+                var e = eve || window.event;
+                var target = e.target || e.srcElement;
+                if (target.id = "navigation") {
+                    clearInterval(that.t1);
+                    that.t1 = setInterval(() => {
+                        var t = document.documentElement.scrollTop;
+                        var speed = t / 15;
+                        document.documentElement.scrollTop -= speed;
+                        if (t <= 0) {
+                            clearInterval(that.t1);
+                        }
+                    }, 13);
+                }
+            }
+            for (var i = 0; i < this.ali.length; i++) {
+                this.ali[i].index = i;
+                this.ali[i].onmouseover = function (eve) {
+                    var e = eve || window.event;
+                    var target = e.target || e.srcElement;
+                    e.stopPropagation();
+                    for (var i = 0; i < that.menuli.length; i++) {
+                        that.menuli[i].style.display = "none";
+                    }
+                    that.menuli[this.index].style.display = "block";
+                    console.log(this.index)
+                    that.menudata.style.opacity = "1";
+                }
+                this.ali[i].onmouseout = function (eve) {
+                    var e = eve || window.event;
+                    var target = e.target || e.srcElement;
+                    e.stopPropagation();
+                    that.menudata.style.opacity = "0";
+                }
+            }
+            this.menudata.onmouseenter = function () {
+                this.style.opacity = "1";
             }
 
         }
