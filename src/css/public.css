@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+em,
+i,
+s {
+    text-decoration: none;
+    font-style: normal;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+body {
+    font: 12px/150% arial, "Hiragino Sans GB", SimSun, tahoma, sans-serif;
+}
+
+.nav:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.nav li {
+    float: left;
+}
+
+.nav li a {
+    display: block;
+}
+
+.clear:after {
+    content: "";
+    display: block;
+    clear: both;
+}

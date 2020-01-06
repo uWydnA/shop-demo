@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="css/regist.css">
+    <title>欢迎注册-百联</title>
+</head>
+
+<body>
+    <div id="header">
+        <div class="margin clear">
+            <div class="header-logo">
+                <div class="fl">
+                    <a href="https://www.bl.com">
+                        <img src="https://res15.iblimg.com/respc-1/resources/v3.0/css/i/logon-logo.png">
+                    </a>
+                </div>
+                <div class="fl">
+                    <a href="https://www.bl.com">
+                        <img src="https://res12.iblimg.com/respc-1/resources/v3.0/css/i/V3login-font4.png">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div class="margin">
+            <div class="center-top">
+                <div class="title-info">您好，感谢您加入i百联</div>
+                <div class="title-login">如有账号，请点击 <a href="login.html">登录</a></div>
+            </div>
+            <div class="center-bottom">
+                <form action="#">
+                    <div class="loginPerfect-data clear">
+                        <div class="name"><i>*</i>用户名：</div>
+                        <div class="loginPerfect-input-div">
+                            <div class="loginPerfect-input">
+                                <input name="loginId" id="loginId" class="index-1 inp inp-primaryclick inp-primaryblur"
+                                    maxlength="20" type="text" placeholder="6-20位字符，支持字母或字母与数字组合">
+                            </div>
+                        </div>
+                        <ul class="prompt cc_cursor" style="float:left; line-height:36px;">
+                            <li class="prompt-text" style="display: none;"><i><img
+                                        src="https://res14.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-1.png"
+                                        width="16" height="16"></i><span>请输入用户名</span></li>
+                            <li class="prompt-error" style="display: none;"><i><img
+                                        src="https://res15.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-2.png"
+                                        width="16" height="16"></i><span>用户名只能由字母或字母和数字组合</span></li>
+                            <li class="prompt-correct" style="display: none;"><i><img
+                                        src="https://res12.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-3.png"
+                                        width="16" height="16"></i><span></span></li>
+                        </ul>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="loginPerfect-data clear">
+                        <div class="name"><i>*</i>登录密码：</div>
+                        <div class="loginPerfect-input-div">
+                            <div class="loginPerfect-input">
+                                <input name="loginId" id="loginPass"
+                                    class="index-1 inp inp-primaryclick inp-primaryblur" maxlength="20" type="text"
+                                    placeholder="8-20位字符，至少使用两种字符组合">
+                            </div>
+                        </div>
+                        <ul class="prompt" style="float:left; line-height:36px;">
+                            <li class="prompt-text" style="display: none;"><i><img
+                                        src="https://res12.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-1.png"
+                                        width="16" height="16">
+                                </i><span>密码强度</span>
+                                <i id="strength_L" class="strength-1 strengthatcive">弱</i>
+                                <i id="strength_M" class="strength-1">中</i>
+                                <i id=" strength_H" class="strength-1">强</i>
+                            </li>
+                            <li class="prompt-error" style="display: none;"><i><img
+                                        src="https://res13.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-2.png"
+                                        width="16" height="16"></i><span>登陆密码必须是8-20位字符</span></li>
+                            <li class="prompt-correct" style="display: none;">
+                                <i><img src="https://res14.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-3.png"
+                                        width="16" height="16">
+                                </i><span>密码强度</span>
+                                <i id="strength_L" class="strength-1"
+                                    style="background:#FF0000 none repeat scroll 0% 0%;">弱</i>
+                                <i id="strength_M" class="strength-1"
+                                    style="background:#cccccc none repeat scroll 0% 0%;">中</i>
+                                <i id="strength_H" class="strength-1"
+                                    style="background:#cccccc none repeat scroll 0% 0%;">强</i>
+                            </li>
+                            <li class="prompt-caps" style="display: none;">
+                                <i><img src="https://res15.iblimg.com/respc-1/resources/v3.0/css/i/pay-notice.png"
+                                        height="16" width="16"></i><span>大写锁定已打开，请注意大小写！</span>
+                            </li>
+                        </ul>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="loginPerfect-data clear">
+                        <div class="name"><i>*</i>确认密码：</div>
+                        <div class="loginPerfect-input-div">
+                            <div class="loginPerfect-input">
+                                <input name="loginId" id="loginenpass"
+                                    class="index-1 inp inp-primaryclick inp-primaryblur" maxlength="20" type="text"
+                                    placeholder="请再次输入密码">
+                            </div>
+                        </div>
+                        <ul class="prompt" style="float:left; line-height:36px;">
+                            <li class="prompt-text" style="display: none;"><i><img
+                                        src="https://res15.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-1.png"
+                                        width="16" height="16"></i><span>请输入确认密码</span></li>
+                            <li class="prompt-error" style="display: none;"><i><img
+                                        src="https://res12.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-2.png"
+                                        width="16" height="16"></i><span>请输入确认密码</span></li>
+                            <li class="prompt-correct" style="display: none;"><i><img
+                                        src="https://res13.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-3.png"
+                                        width="16" height="16"></i><span></span></li>
+                            <li class="prompt-caps" style="display: none;">
+                                <i><img src="https://res14.iblimg.com/respc-1/resources/v3.0/css/i/pay-notice.png"
+                                        height="16" width="16"></i><span>大写锁定已打开，请注意大小写！</span>
+                            </li>
+                        </ul>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="loginPerfect-data clear">
+                        <div class="name"><i>*</i>手机号：</div>
+                        <div class="loginPerfect-input-div">
+                            <div class="loginPerfect-input">
+                                <input name="loginId" id="loginnum" class="index-1 inp inp-primaryclick inp-primaryblur"
+                                    maxlength="11" type="text" placeholder="请输入11位手机号码">
+                            </div>
+                        </div>
+                        <ul class="prompt" style="float:left; line-height:36px;">
+                            <li class="prompt-text" style="display: none;"><i><img
+                                        src="https://res15.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-1.png"
+                                        width="16" height="16"></i><span>请输入手机号码</span></li>
+                            <li class="prompt-error" style="display: none;"><i><img
+                                        src="https://res12.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-2.png"
+                                        width="16" height="16"></i><span>请输入手机号码</span></li>
+                            <li class="prompt-correct" style="display: none;"><i><img
+                                        src="https://res13.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-3.png"
+                                        width="16" height="16"></i><span></span></li>
+                        </ul>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="loginPerfect-data clear">
+                        <div class="name"><i>*</i>电子邮箱：</div>
+                        <div class="loginPerfect-input-div">
+                            <div class="loginPerfect-input">
+                                <input name="loginId" id="loginEmail"
+                                    class="index-1 inp inp-primaryclick inp-primaryblur" maxlength="30" type="text"
+                                    placeholder="请输入有效邮箱">
+                            </div>
+                        </div>
+                        <ul class="prompt" style="float:left; line-height:36px;">
+                            <li class="prompt-text" style="display: none;"><i><img
+                                        src="https://res15.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-1.png"
+                                        width="16" height="16"></i><span>请输入电子邮箱</span></li>
+                            <li class="prompt-error" style="display: none;"><i><img
+                                        src="https://res12.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-2.png"
+                                        width="16" height="16"></i><span>请输入正确的电子邮箱</span></li>
+                            <li class="prompt-correct" style="display: none;"><i><img
+                                        src="https://res13.iblimg.com/respc-1/resources/v3.0/css/i/v-icon-3.png"
+                                        width="16" height="16"></i><span></span></li>
+                        </ul>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="loginPerfect-remember">
+                        <label><input type="checkbox"><span>我已阅读并同意</span></label>
+                        <a id="agreement"
+                            href="https://help.bl.com/articleDetailed.html?articleId=382&amp;categoryType=help"
+                            target="_blank">《百联通会员注册协议》、</a>
+                        <a id="afbAgre"
+                            href="https://help.bl.com/toHelpCenter/queryCategoryId.html?categoryId=701&amp;categoryType=help"
+                            target="_blank">《安付宝用户服务协议》、</a>
+                        <a id="afbPrivacy"
+                            href="https://help.bl.com/toHelpCenter/queryCategoryId.html?categoryId=702&amp;categoryType=help"
+                            target="_blank">《安付宝隐私权政策》</a>
+                        <input type="hidden" value="ok" name="userAgreement" id="userAgreement">
+                        <input type="hidden" id="adChannel" name="adChannel" value="baiduSEM">
+                        <input type="hidden" id="adId" name="adId" value="null">
+                        <input type="hidden" id="orgId" name="orgId" value="">
+                        <input type="hidden" id="shopId" name="shopId" value="null">
+                        <input type="hidden" id="putonNum" name="putonNum" value="MD1572337102910">
+                    </div>
+                    <div class="register-button" id="subbtn"><button type="button" class="btn btn-primary sub">立即注册
+                            完成绑定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="margin">
+            <div class="footer-t clear fnav">
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=285&amp;&amp;categoryType=about">关于我们</a>
+                <span>|</span>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=286&amp;&amp;categoryType=about">联系我们</a>
+                <span>|</span>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=287&amp;&amp;categoryType=about">加盟合作</a>
+                <span>|</span>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=288&amp;&amp;categoryType=about">诚征英才</a>
+                <span>|</span>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=289&amp;&amp;categoryType=about">友情链接</a>
+                <span>|</span>
+                <a target="_blank" href="https://www.bl.com/newretail.html">新零售合作</a>
+            </div>
+            <div class="copyright fnav">百联集团有限公司版权所有 <span>|</span> 客服电话：400-900-8800 <span>|</span> 沪ICP备15028847号-1
+            </div>
+            <a target="_blank" href="https://res12.iblimg.com/respc-1/resources/v4.0/img/yaopingzigezheng.png"
+                class="drug-message fnav">互联网药品信息服务资质证书编号：沪-（非营业性）-2016-0044</a>
+            <a target="_blank" href="https://promotion.bl.com/nc/PC_HDGL20180705000005986_6252.html"
+                class="drug-message fnav">全渠道增值电信业务经营许可证</a>
+            <div class="police fnav">
+                <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010102002366" target="_blank">
+                    <img src="https://res13.iblimg.com/respc-1/resources/v4.0/css/i/gongan.png">
+                    <span style="">沪公网安备 31010102002366号</span>
+                </a>
+                <a href="http://218.242.124.22:8081/businessCheck/verifKey.do?showType=extShow&amp;serial=9031000020160729145737000001099658-SAIC_SHOW_310000-20160406145114141192&amp;signData=MEYCIQCUhx+ulQL4t9jJgfgCH1oeTxexuWOVww3Hel3/UlRyLQIhAO2fVtZDl0EkYb0p/3M50cXqe694wDQoJNuUKNdQNOWf"
+                    target="_blank">
+                    <img src="https://res14.iblimg.com/respc-1/resources/v4.1/widget/footer1200/i/gongs.png" width="20"
+                        height="21">
+                    <span style="">上海工商</span>
+                </a>
+                <a target="_blank" href="https://promotion.bl.com/nc/PC_HDGL20170407000001552_1592.html">
+                    <img src="https://res15.iblimg.com/respc-1/resources/v4.1/widget/footer1200/i/zhizhao.png">
+                    <span style="">经营执照</span>
+                </a>
+                <a href="http://scjgj.sh.gov.cn/platform/survey/step1_phone" target="_blank">
+                    <img src="https://res12.iblimg.com/respc-1/resources/v4.1/widget/footer1200/i/wangjing1.png"
+                        width="21">
+                    <span style="">网购大家评</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="libs/require.js"></script>
+<script src="js/regist.js"></script>
+
+</html>

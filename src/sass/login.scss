@@ -1,0 +1,129 @@
+.margin {
+    width: 950px;
+    margin: 0 auto;
+}
+
+
+
+#header {
+    height: 110px;
+
+    .header-logo {
+        float: left;
+        margin-top: 29px;
+
+        .fl {
+            float: left;
+        }
+    }
+}
+
+#main {
+    padding: 30px 0 25px;
+    background: url(../images/login-body.jpg) no-repeat center;
+
+    .login-content {
+        width: 488px;
+        margin: 0 auto;
+        border: 6px solid #e2e2e2;
+        background: #fff;
+        font-family: 'Microsoft YaHei';
+        padding: 80px 0;
+
+        .login-main-center {
+            width: 300px;
+            margin: 0 auto;
+            padding: 45px 0;
+            position: relative;
+
+            .login-item {
+                margin-top: 10px;
+                padding-bottom: 10px;
+                position: relative;
+
+                input {
+                    padding-left: 35px;
+                    width: 250px;
+                    font-size: 12px;
+                    vertical-align: middle;
+                    line-height: 34px;
+                }
+
+                i {
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                }
+            }
+
+            .login-title {
+                color: #FF4A4A;
+                font: 700 16px/50px "";
+                text-align: center;
+            }
+        }
+    }
+
+    .loginbtn {
+        background: #e6133c;
+        text-align: center;
+    }
+
+    .login-font {
+        height: 30px;
+        line-height: 30px;
+        padding-bottom: 10px;
+        clear: both;
+        color: #666;
+        font-family: 'Microsoft YaHei';
+
+        a {
+            color: #666;
+            float: right;
+
+            &:hover {
+                color: #08c;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    #loginsubmit {
+        color: #ffffff;
+        background-color: #e6133c;
+        font-size: 16px;
+        height: 36px;
+        width: 136px;
+        border-radius: 2px;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        cursor: pointer;
+        border: 0;
+        font-family: 'Microsoft YaHei';
+        outline: none;
+    }
+}
+
+#footer {
+    padding-top: 30px;
+
+    .footer-t span {
+        padding: 0px 10px;
+    }
+
+    a:hover {
+        color: #d62233;
+    }
+
+    .fnav {
+        line-height: 24px;
+        text-align: center;
+        padding-top: 10px;
+        color: #cccccc;
+    }
+
+    .drug-message {
+        display: block;
+        color: #003333;
+    }
+}
