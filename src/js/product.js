@@ -11,6 +11,7 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.goods = document.querySelector(".goods-name h1");
             this.pup = document.querySelector(".pup")
             this.lazytag = document.querySelector(".lazytag");
             this.picture = document.querySelector("#picture");
@@ -98,6 +99,9 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
                     }
                 }
                 that.bigimg.children[0].src = `images/${that.res.imgm[0]}`;
+                that.goods.innerHTML = `
+                <em class="late">自营百联</em>
+                ${that.res.name}`;
                 that.lazytag.src = `images/${that.res.imgs[0]}`;
                 for (var i = 0; i < that.res.imgs.length; i++) {
                     str += `<li index = "${i}"><img jqimg="images/b1.jpg" id="img_0" src="images/${that.res.imgs[i]}";style="display: inline;"></li>`
