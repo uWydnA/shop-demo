@@ -2,6 +2,7 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
     class Search {
         constructor() {
             this.cztUrl = "http://127.0.0.2:8888/api";
+            this.title = document.querySelector("head title")
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
             this.bol = document.querySelector(".progress-bar-ol")
@@ -17,6 +18,9 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
             this.select = document.querySelector(".select");
             this.ali = document.querySelectorAll(".selectli");
             this.menuli = document.querySelectorAll("#menuData li")
+            this.proClass = document.querySelector(".pro-class");
+            this.searchtxt = document.querySelector(".searchtxt");
+            this.searchbtn = document.querySelector(".searchbtn");
             this.t1;
             this.index = 0;
             this.indexPrev;
@@ -28,35 +32,169 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
         }
         init() {
             let that = this;
-            let token = gc;
-            let key = token.init({
+            let getCookie = gc;
+            this.proClass.style.height = "auto";
+            let key = getCookie.init({
                 key: "token"
             });
             let ajax = aj;
+            if (key) {
+                ajax.init({
+                    url: that.cztUrl,
+                    data: {
+                        type: "findToken",
+                        token: key
+                    }
+                }).then((res) => {
+                    that.res = JSON.parse(res);
+                    if (that.res.code == "21") {
+                        that.res = that.res.msg;
+                        let str = that.res.slice(0, 2);
+                        str += "**";
+                        str += that.res.slice(5, that.res.length);
+                        that.loginName.innerHTML = `
+                        <a href="https://my.bl.com/ym/nl/toIndex.html" target="_blank">
+                            <s class="hi">Hi，</s>
+                            <span id="member_name" class ="username">${str}</span>
+                        </b>
+                        <a href="https://passport.bl.com/loginDisplay.html?type=logout">退出</a>
+                        <b></b>
+                        `;
+                    }
+
+                })
+            }
+            let cook = getCookie.init({
+                key: "search"
+            })
+            this.searchtxt.value = cook;
             ajax.init({
                 url: that.cztUrl,
                 data: {
-                    type: "findToken",
-                    token: key
+                    retr0: 1,
+                    json: "json/search.json"
                 }
             }).then((res) => {
                 that.res = JSON.parse(res);
-                if (that.res.code == "21") {
-                    that.res = that.res.msg;
-                    let str = that.res.slice(0, 2);
-                    str += "**";
-                    str += that.res.slice(5, that.res.length);
-                    that.loginName.innerHTML = `
-					<a href="https://my.bl.com/ym/nl/toIndex.html" target="_blank">
-						<s class="hi">Hi，</s>
-						<span id="member_name" class ="username">${str}</span>
-					</b>
-					<a href="https://passport.bl.com/loginDisplay.html?type=logout">退出</a>
-					<b></b>
-                    `;
+                let str = "";
+                for (var i in that.res) {
+                    if (that.res[i].key == cook) {
+                        that.title.innerHTML = that.res[i].title;
+                        that.res = that.res[i].val;
+                        break;
+                    }
                 }
+                if (that.res.length > 0) {
+                    for (var i in that.res) {
+                        if (that.res[i].info == "") {
+                            str += `<li dataId = "${that.res[i].goodId}">
+                            <div class="pro-show" >
+                                <div class="pro-icon">
+                                </div>
+                                <!-- 商品大图 -->
+                                <div class="pro-img">
+                                    <a target="_blank";">
+                                        <img class="" src="${that.res[i].img}" height="200" width="200" style="display: inline;">
+                                    </a>
+                                    <div class="pro-img-show hotsale">${that.res[i].hotsale}</div>
+                                </div>
+        
+                                <div class="pro-money">
+                                    <div class="money-fl">￥${that.res[i].price}</div>
+                                    <div class="money-fr"></div>
+                                </div>
+                                <div class="product-comment">
+                                    <div class="pro-name " style="word-break: none;
+                                    overflow: visible;
+                                    white-space: normal;
+                                    text-overflow: none;">
+                                        <span style="color: #e6133c">
+                                        </span>
+                                        <a target="_blank" title="索尼（SONY）PlayStation 4 游戏手柄 迷彩绿（PS4）" href="https://product.bl.com/3160950.html?scf=1" onclick="addCmCreateElementTag(3160950,'索尼（SONY）PlayStation 4 游戏手柄 迷彩绿（PS4）',208043,this);">${that.res[i].name}</a>
+                                    </div>
+                                    <div class="pro-info" title="支持各PS4主机">${that.res[i].info}</div>
+                                </div>
+                                <div class="pro-assess">
+                                    &nbsp;
+                                </div>
+                                <!-- 经营类型 -->
+                                <div class="pro-assess">
+                                    <div class="pro-assess-right">
+                                        自营百联
+                                        <input type="hidden" value="1" class="subYunType">
+                                    </div>
+                                </div>
+                                <div class="pro-button">
+                                    <input type="hidden" value="3160950">
+                                    <input type="hidden" value="338.0">
+                                    <input type="hidden" value="338.0">
+                                    <input type="hidden" value="索尼（SONY）PlayStation 4 游戏手柄 迷彩绿（PS4）">
+                                    <input type="hidden" value="https://Img.iblimg.com/photo-38/3020/612932569_200x200.jpg">
+                                    <input type="hidden" value="a102245">
+                                    <input type="hidden" value="208043">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <button type="button" class="btn btn-primary addCard">加入购物车</button>
+                                </div>
+                            </div>
+                        </li>`
+                        } else {
+                            str += `<li dataId = "${that.res[i].goodId}">
+                            <div class="pro-show" >
+                                <div class="pro-icon">
+                                </div>
+                                <!-- 商品大图 -->
+                                <div class="pro-img">
+                                    <a target="_blank";">
+                                        <img class="" src="${that.res[i].img}" height="200" width="200" style="display: inline;">
+                                    </a>
+                                    <div class="pro-img-show hotsale">${that.res[i].hotsale}</div>
+                                </div>
+        
+                                <div class="pro-money">
+                                    <div class="money-fl">￥${that.res[i].price}</div>
+                                    <div class="money-fr"></div>
+                                </div>
+                                <div class="product-comment">
+                                    <div class="pro-name ">
+                                        <span style="color: #e6133c">
+                                        </span>
+                                        <a target="_blank" title="索尼（SONY）PlayStation 4 游戏手柄 迷彩绿（PS4）" href="https://product.bl.com/3160950.html?scf=1" onclick="addCmCreateElementTag(3160950,'索尼（SONY）PlayStation 4 游戏手柄 迷彩绿（PS4）',208043,this);">${that.res[i].name}</a>
+                                    </div>
+                                    <div class="pro-info" title="支持各PS4主机">${that.res[i].info}</div>
+                                </div>
+                                <div class="pro-assess">
+                                    &nbsp;
+                                </div>
+                                <!-- 经营类型 -->
+                                <div class="pro-assess">
+                                    <div class="pro-assess-right">
+                                        自营百联
+                                        <input type="hidden" value="1" class="subYunType">
+                                    </div>
+                                </div>
+                                <div class="pro-button">
+                                    <input type="hidden" value="3160950">
+                                    <input type="hidden" value="338.0">
+                                    <input type="hidden" value="338.0">
+                                    <input type="hidden" value="索尼（SONY）PlayStation 4 游戏手柄 迷彩绿（PS4）">
+                                    <input type="hidden" value="https://Img.iblimg.com/photo-38/3020/612932569_200x200.jpg">
+                                    <input type="hidden" value="a102245">
+                                    <input type="hidden" value="208043">
+                                    <input type="hidden" value="">
+                                    <input type="hidden" value="">
+                                    <button type="button" class="btn btn-primary addCard">加入购物车</button>
+                                </div>
+                            </div>
+                        </li>`
+                        }
 
+                    }
+                    that.proClass.innerHTML = str;
+                }
             })
+
+
         }
         addEvent() {
             var that = this;

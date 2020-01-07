@@ -16,6 +16,10 @@ s {
     font-style: normal;
 }
 
+.on {}
+
+
+
 li {
     list-style: none;
 }
@@ -23,6 +27,12 @@ li {
 a {
     text-decoration: none;
     color: #000;
+}
+
+input {
+    font: 12px/150% arial, 'Hiragino Sans GB', SimSun, tahoma, sans-serif;
+    font-family: 'SimSun';
+    outline: 0;
 }
 
 body {

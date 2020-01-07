@@ -1,4 +1,4 @@
-require(["js/swiper", "js/getCookies", "js/ajax"], function (swiper, gc, aj) {
+require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie"], function (swiper, gc, aj, sc) {
     class Shop {
         constructor() {
             this.cztUrl = "http://127.0.0.2:8888/api";
@@ -14,6 +14,8 @@ require(["js/swiper", "js/getCookies", "js/ajax"], function (swiper, gc, aj) {
             this.topbox = document.querySelector("#navbox");
             this.select = document.querySelector(".select");
             this.ali = document.querySelectorAll(".selectli");
+            this.searchtxt = document.querySelector(".searchtxt");
+            this.searchbtn = document.querySelector(".searchbtn");
             this.menuli = document.querySelectorAll("#menuData li")
             this.t1;
             this.index = 0;
@@ -30,39 +32,41 @@ require(["js/swiper", "js/getCookies", "js/ajax"], function (swiper, gc, aj) {
             let key = token.init({
                 key: "token"
             });
-            let ajax = aj;
-            ajax.init({
-                url: that.cztUrl,
-                data: {
-                    type: "findToken",
-                    token: key
-                }
-            }).then((res) => {
-                that.res = JSON.parse(res);
-                if (that.res.code == "21") {
-                    that.res = that.res.msg;
-                    let str = that.res.slice(0, 2);
-                    str += "**";
-                    str += that.res.slice(5, that.res.length);
-                    that.loginName.innerHTML = `
-					<a href="https://my.bl.com/ym/nl/toIndex.html" target="_blank">
-						<s class="hi">Hi，</s>
-						<span id="member_name" class ="username">${str}</span>
-					</b>
-					<a href="https://passport.bl.com/loginDisplay.html?type=logout">退出</a>
-					<b></b>
-                    `;
-                    that.remname.innerHTML = `
-                    Hi，<span id="memberName">${str}</span><br>
-                    <p class="blogin_a">
-                        <a href=";" style="display: none;">登录</a>
-                        <a href="https://reg.bl.com/regist.html" target="_blank" style="display: none;">注册</a>
-                        <a id="memberDetail">普通卡会员</a>
-                        <a id="getCoupon" href="https://coupon.bl.com/list.html" target="_blank">领券中心</a>
-                    </p>`;
-                }
+            if (key) {
+                let ajax = aj;
+                ajax.init({
+                    url: that.cztUrl,
+                    data: {
+                        type: "findToken",
+                        token: key
+                    }
+                }).then((res) => {
+                    that.res = JSON.parse(res);
+                    if (that.res.code == "21") {
+                        that.res = that.res.msg;
+                        let str = that.res.slice(0, 2);
+                        str += "**";
+                        str += that.res.slice(5, that.res.length);
+                        that.loginName.innerHTML = `
+                        <a href="https://my.bl.com/ym/nl/toIndex.html" target="_blank">
+                            <s class="hi">Hi，</s>
+                            <span id="member_name" class ="username">${str}</span>
+                        </b>
+                        <a href="https://passport.bl.com/loginDisplay.html?type=logout">退出</a>
+                        <b></b>
+                        `;
+                        that.remname.innerHTML = `
+                        Hi，<span id="memberName">${str}</span><br>
+                        <p class="blogin_a">
+                            <a href=";" style="display: none;">登录</a>
+                            <a href="https://reg.bl.com/regist.html" target="_blank" style="display: none;">注册</a>
+                            <a id="memberDetail">普通卡会员</a>
+                            <a id="getCoupon" href="https://coupon.bl.com/list.html" target="_blank">领券中心</a>
+                        </p>`;
+                    }
 
-            })
+                })
+            }
             this.getAjax(this.cztUrl, {
                 retr0: 1,
                 json: "json/czt.json"
@@ -152,6 +156,16 @@ require(["js/swiper", "js/getCookies", "js/ajax"], function (swiper, gc, aj) {
         }
         addEvent() {
             var that = this;
+            this.searchbtn.onclick = function () {
+                let cook = sc;
+                cook.init({
+                    key: "search",
+                    val: that.searchtxt.value,
+                })
+                setTimeout(() => {
+                    location.assign("search.html");
+                }, 100);
+            }
             this.banner.onmouseover = function () {
                 that.prev.style.display = "block";
                 that.next.style.display = "block";
