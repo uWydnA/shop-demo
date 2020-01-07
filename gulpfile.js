@@ -10,6 +10,7 @@ const sass = require("gulp-sass");
 const proxy = require("http-proxy-middleware");
 
 function indexFn(end) {
+    gulp.src(["src/images/*"]).pipe(gulp.dest("server/images")).pipe(connect.reload());
     gulp.src(["src/*.html"]).pipe(gulp.dest("server")).pipe(connect.reload());
     gulp.src(["src/json/*.json"]).pipe(gulp.dest("server/json")).pipe(connect.reload());
     gulp.src(["src/js/*.js"]).pipe(gulp.dest("server/js")).pipe(connect.reload());
@@ -22,9 +23,8 @@ function watchFn() {
     gulp.watch(["src/*.html"], indexFn)
     gulp.watch(["src/json/*.json"], indexFn)
     gulp.watch(["src/js/*.js"], indexFn)
-    gulp.watch(["src/sass/index.scss"], sassFn);
-    gulp.watch(["src/sass/login.scss"], sassFn);
-    gulp.watch(["src/sass/regist.scss"], sassFn);
+    gulp.watch(["src/sass/*.scss"], sassFn);
+    gulp.watch(["src/images/*"], indexFn);
 }
 
 function ajaxHandle(req, res) {
@@ -52,31 +52,31 @@ function fsHandle(req, res) {
     })
 }
 
-function serverFn() {
-    connect.server({
-        root: "server",
-        port: "8888",
-        livereload: true,
-        // middleware: function (connect, opt) {
-        //     return [
-        //         proxy('/', { //代理之后的名字
-        //             target: 'https://127.0.0.1:8888', //要代理的地址
-        //             changeOrigin: true,
-        //             pathRewrite: {
-        //                 '^/': '' //声明路径的重写规则，为代理之后的名字
-        //             }
-        //         }),
-        //         // proxy('/abc',  {    //代理之后的名字
-        //         //     target: 'https://wanandroid.com/wxarticle', //要代理的地址
-        //         //     changeOrigin:true,
-        //         //     pathRewrite:{
-        //         //         '^/abc':''  //声明路径的重写规则，为代理之后的名字
-        //         //     }
-        //         // })
-        //     ]
-        // }
-    })
-}
+// function serverFn() {
+//     connect.server({
+//         root: "server",
+//         port: "8888",
+//         livereload: true,
+//         // middleware: function (connect, opt) {
+//         //     return [
+//         //         proxy('/', { //代理之后的名字
+//         //             target: 'https://127.0.0.1:8888', //要代理的地址
+//         //             changeOrigin: true,
+//         //             pathRewrite: {
+//         //                 '^/': '' //声明路径的重写规则，为代理之后的名字
+//         //             }
+//         //         }),
+//         //         // proxy('/abc',  {    //代理之后的名字
+//         //         //     target: 'https://wanandroid.com/wxarticle', //要代理的地址
+//         //         //     changeOrigin:true,
+//         //         //     pathRewrite:{
+//         //         //         '^/abc':''  //声明路径的重写规则，为代理之后的名字
+//         //         //     }
+//         //         // })
+//         //     ]
+//         // }
+//     })
+// }
 
 
 function sassFn() {
@@ -86,5 +86,5 @@ function sassFn() {
 
 exports.index = indexFn;
 exports.watch = watchFn;
-exports.server = serverFn;
-exports.serverWatch = gulp.parallel(serverFn, watchFn)
+// exports.server = serverFn;
+// exports.serverWatch = gulp.parallel(serverFn, watchFn)
