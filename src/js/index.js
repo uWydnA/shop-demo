@@ -1,7 +1,7 @@
 require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie"], function (swiper, gc, aj, sc) {
     class Shop {
         constructor() {
-            this.cztUrl = "http://127.0.0.2:8888/api";
+            this.cztUrl = "http://10.11.51.202:8888/api";
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
             this.bol = document.querySelector(".progress-bar-ol")

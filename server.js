@@ -12,8 +12,8 @@ http.createServer((req, res) => {
             fsHandle(req, res);
         }
     }
-}).listen("8888", "127.0.0.2", () => {
-    console.log("run server at http://127.0.0.2:8888");
+}).listen("8888", "10.11.51.202", () => {
+    console.log("run server at http://10.11.51.202:8888");
 })
 
 function random(a, b) {

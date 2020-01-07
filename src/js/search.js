@@ -1,7 +1,7 @@
-require(["js/getCookies", "js/ajax"], function (gc, aj) {
+require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
     class Search {
         constructor() {
-            this.cztUrl = "http://127.0.0.2:8888/api";
+            this.cztUrl = "http://10.11.51.202:8888/api";
             this.title = document.querySelector("head title")
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
@@ -37,6 +37,7 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
             let key = getCookie.init({
                 key: "token"
             });
+            this.setcook = sc;
             let ajax = aj;
             if (key) {
                 ajax.init({
@@ -235,7 +236,25 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
                 that.select.style.display = "none";
                 that.selectbg.style.display = "none";
             }
-
+            this.proClass.onclick = function (eve) {
+                var e = eve || window.event;
+                var target = e.target || e.srcElement;
+                var t = target;
+                while (true) {
+                    if (t.nodeName == "LI") {
+                        break;
+                    } else {
+                        t = t.parentNode;
+                    }
+                }
+                that.setcook.init({
+                    key: "goodId",
+                    val: t.getAttribute("dataid")
+                })
+                setTimeout(() => {
+                    location.assign("product.html");
+                }, 100);
+            }
         }
     }
     new Search();
