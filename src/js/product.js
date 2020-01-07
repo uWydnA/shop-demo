@@ -11,6 +11,8 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.titlename = document.querySelector(".title");
+            this.price = document.querySelector(".price");
             this.goods = document.querySelector(".goods-name h1");
             this.pup = document.querySelector(".pup")
             this.lazytag = document.querySelector(".lazytag");
@@ -19,6 +21,7 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
             this.navli = document.querySelectorAll(".navli");
             this.selectbg = document.querySelector(".selectbg");
             this.menudata = document.querySelector("div #menuData");
+            this.itemnumber = document.querySelector("#itemnumber");
             this.topbox = document.querySelector("#navbox");
             this.select = document.querySelector(".select");
             this.ali = document.querySelectorAll(".selectli");
@@ -27,6 +30,8 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
             this.searchtxt = document.querySelector(".searchtxt");
             this.searchbtn = document.querySelector(".searchbtn");
             this.mainPic = document.querySelector("#mainPic");
+            this.reduce = document.querySelector("#reduce");
+            this.addnum = document.querySelector("#addnum");
             this.t1;
             this.index = 0;
             this.indexPrev;
@@ -102,6 +107,11 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
                 that.goods.innerHTML = `
                 <em class="late">自营百联</em>
                 ${that.res.name}`;
+                that.price.innerHTML = `<span class="price">
+                <strong id="FlashPrice"><i>¥</i>
+                    ${that.res.price}</strong>
+            </span>`;
+                that.titlename.innerHTML = that.res.info;
                 that.lazytag.src = `images/${that.res.imgs[0]}`;
                 for (var i = 0; i < that.res.imgs.length; i++) {
                     str += `<li index = "${i}"><img jqimg="images/b1.jpg" id="img_0" src="images/${that.res.imgs[i]}";style="display: inline;"></li>`
@@ -182,6 +192,22 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
                 that.bigimg.children[0].style.top = -t * 2 + "px";
                 that.bigimg.children[0].style.left = -l * 2 + "px";
 
+            }
+            this.addnum.onclick = function () {
+                if (that.itemnumber.value == 1) {
+                    that.reduce.className = "btn-down cc_cursor"
+                }
+                that.itemnumber.value++;
+            }
+            this.reduce.onclick = function () {
+                if (that.itemnumber.value <= 1) {
+                    this.className = "btn-down-disable cc_cursor"
+                } else if (that.itemnumber.value > 1) {
+                    this.className = "btn-down cc_cursor"
+                }
+                if (that.itemnumber.value > 1) {
+                    that.itemnumber.value--;
+                }
             }
 
         }

@@ -17,7 +17,8 @@
         "info": "支持各PS4主机",
         "goodId": "3246106"
     }, {
-        "img": "images/ps4_3_1_200x200.jpg",
+        "imgs": ["ps4_3_1_360x360.jpg", "ps4_3_2_360x360.jpg", "ps4_3_3_360x360.jpg", "ps4_3_4_360x360.jpg"],
+        "imgm": ["ps4_3_1_800x800.jpg", "ps4_3_2_800x800.jpg", "ps4_3_3_800x800.jpg", "ps4_3_4_800x800.jpg"],
         "hotsale": "国行主机",
         "price": "2749.00",
         "name": "索尼（SONY）PlayStation 4 Pro 1TB 电脑娱乐游戏主机（黑色）国行PS4 PRO",
