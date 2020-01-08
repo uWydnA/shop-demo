@@ -1,7 +1,7 @@
 require(["js/ajax", "js/getCookies"], function (aj, gc) {
     class Shop {
         constructor() {
-            this.cztUrl = "http://127.0.0.1:8888/api";
+            this.cztUrl = "http://10.11.51.202:8888/api";
             this.title = document.querySelector("head title")
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
@@ -25,6 +25,7 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
             this.navli = document.querySelectorAll(".navli");
             this.selectbg = document.querySelector(".selectbg");
             this.menudata = document.querySelector("div #menuData");
+            this.shopnum = document.querySelector(".shopnum");
             this.itemnumber = document.querySelector("#itemnumber");
             this.topbox = document.querySelector("#navbox");
             this.select = document.querySelector(".select");
@@ -108,6 +109,7 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                 }
 
                 that.name.innerHTML = `全部商品<span>${that.num}</span>`;
+                that.shopnum.innerHTML = that.num;
                 ajax.init({
                     url: that.cztUrl,
                     data: {
@@ -162,6 +164,7 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                                 </div>
                             </li>`;
                                 that.zongjia += parseInt(sum);
+
                             }
                         }
                     }
@@ -181,6 +184,7 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                 var e = eve || window.event;
                 var target = e.target || e.srcElement;
                 if (target.className == "reduce") {
+
                     var t = target.parentNode.children[1].value >= 2 ? target.parentNode.children[1].value-- : target.parentNode.children[1].value;
                     var index = target.getAttribute("index");
                     that.asum[index].innerHTML = `￥${target.parentNode.children[1].value * parseInt(that.aprice[index].innerHTML.slice(1, that.aprice[index].innerHTML.length - 1))}`;
@@ -203,10 +207,12 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                         this.style.background = "#fff";
                         that.asum[this.getAttribute("index")].setAttribute("show", 0);
                         that.changeMoney();
+                        that.shopnum.innerHTML = --that.num;
                     } else if (this.flag == 1) {
                         this.flag = 0;
                         this.style.cssText = "background: url(//img.iblimg.com/respc-1/resources/v4.0/css/i/select.png) #d62233 no-repeat;";
                         that.asum[this.getAttribute("index")].setAttribute("show", 1);
+                        that.shopnum.innerHTML = ++that.num;
                         that.changeMoney();
                     }
                     // let str = this.getAttribute("class");

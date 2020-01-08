@@ -18,7 +18,7 @@ define(["js/ajax"], function (getp) {
             };
             let p = getp;
             p.init({
-                url: "http://127.0.0.1:8888/api",
+                url: "http://10.11.51.202:8888/api",
                 data: userMsg
             }).then((res) => {
                 that.res = JSON.parse(res);

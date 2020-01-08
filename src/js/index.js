@@ -1,7 +1,7 @@
-require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie"], function (swiper, gc, aj, sc) {
+require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (swiper, gc, aj, sc, move) {
     class Shop {
         constructor() {
-            this.cztUrl = "http://127.0.0.1:8888/api";
+            this.cztUrl = "http://10.11.51.202:8888/api";
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
             this.bol = document.querySelector(".progress-bar-ol")
@@ -10,13 +10,17 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie"], function (swi
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.move = move;
+            this.like = document.querySelector(".main-like");
             this.menudata = document.querySelector("div #menuData");
+            this.mainczt = document.querySelector(".main-czt");
             this.topbox = document.querySelector("#navbox");
             this.select = document.querySelector(".select");
             this.ali = document.querySelectorAll(".selectli");
             this.searchtxt = document.querySelector(".searchtxt");
             this.searchbtn = document.querySelector(".searchbtn");
             this.menuli = document.querySelectorAll("#menuData li")
+            this.floor = document.querySelector(".floor");
             this.t1;
             this.index = 0;
             this.indexPrev;
@@ -222,6 +226,64 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie"], function (swi
             this.menudata.onmouseenter = function () {
                 this.style.opacity = "1";
             }
+            onscroll = function (eve) {
+                var e = eve || window.event;
+                let t = that.mainczt.offsetTop;
+                let t1 = that.like.offsetTop;
+                let scroll = document.documentElement.scrollTop;
+                if (scroll >= t - 200) {
+                    that.floor.children[0].className = "actived";
+                    that.floor.children[1].className = "";
+                } else {
+                    that.floor.children[0].className = "";
+                }
+                if (scroll >= t1 - 200) {
+                    that.floor.children[0].className = "";
+                    that.floor.children[1].className = "actived";
+                } else {
+                    that.floor.children[1].className = "";
+                }
+                if (scroll > 620) {
+                    setTimeout(() => {
+                        that.floor.style.top = 200 + scroll + "px"
+                    }, 100);
+                } else {
+                    that.floor.style.top = "620px"
+                }
+            }
+
+            this.floor.children[0].onclick = function () {
+                let speed;
+                clearInterval(this.t)
+                this.t = setInterval(() => {
+                    speed = Math.abs((that.mainczt.offsetTop - document.documentElement.scrollTop) / 20);
+                    speed = speed < 1 ? 1 : speed;
+                    console.log(speed)
+                    if (document.documentElement.scrollTop > that.mainczt.offsetTop) {
+                        document.documentElement.scrollTop -= speed;
+                    } else {
+                        document.documentElement.scrollTop += speed;
+                    }
+                    if (Math.abs(that.mainczt.offsetTop - document.documentElement.scrollTop) <= speed) {
+                        document.documentElement.scrollTop = that.mainczt.offsetTop
+                        clearInterval(this.t)
+                    }
+                }, 13);
+            }
+            this.floor.children[1].onclick = function () {
+                let speed;
+                clearInterval(this.t)
+                this.t = setInterval(() => {
+                    speed = (that.like.offsetTop - document.documentElement.scrollTop) / 20;
+                    speed = speed < 1 ? 1 : speed;
+                    document.documentElement.scrollTop += speed;
+                    if (that.like.offsetTop - document.documentElement.scrollTop <= speed) {
+                        document.documentElement.scrollTop = that.like.offsetTop
+                        clearInterval(this.t)
+                    }
+                }, 13);
+            }
+
 
         }
         getAjax(url, data) {

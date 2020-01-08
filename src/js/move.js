@@ -14,7 +14,6 @@ define([], function () {
                     var iNow = parseInt(this.getStyle(this.dom, i));
                     var speed = (this.data[i] - iNow) / 7;
                     speed = speed < 0 ? Math.floor(speed) : Math.ceil(speed);
-
                     (this.data[i] != iNow) && (onoff = false);
                     this.dom.style[i] = iNow + speed + "px";
                 }

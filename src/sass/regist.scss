@@ -11,6 +11,10 @@ input {
     margin: 0 auto;
 }
 
+.normal {
+    border: 1px solid #ccc;
+}
+
 .errer {
     border: 2px solid #f77799;
     box-shadow: 0px 0px 3px #f77799;
@@ -20,9 +24,7 @@ input {
     -webkit-box-shadow: 0px 0px 3px #f77799;
 }
 
-.normal {
-    border: 1px solid #ccc;
-}
+
 
 .right {
     border: 2px solid #7fcbfe;
@@ -110,10 +112,10 @@ input {
                     color: #000;
                     width: 258px;
                     background: #ffffff;
-
+                    border-width: 2px;
 
                     &:hover {
-                        border: 1px solid #999999;
+                        border: 2px solid #999999;
                         box-shadow: 0px 0px 3px #ccc;
                         -moz-box-shadow: 0px 0px 3px #ccc;
                         -ms-box-shadow: 0px 0px 3px #ccc;
@@ -127,6 +129,8 @@ input {
 
             .prompt {
                 margin-left: 10px;
+                height: 36px;
+                overflow: hidden;
 
                 li {
                     margin: 0px;
