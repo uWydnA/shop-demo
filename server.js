@@ -3,6 +3,7 @@ const fs = require("fs");
 const url = require("url");
 const querystring = require("querystring");
 let userMsg = [];
+let userShop = [];
 http.createServer((req, res) => {
     if (req.url != "/favicon.ico") {
         let pathname = url.parse(req.url).pathname;
@@ -12,8 +13,8 @@ http.createServer((req, res) => {
             fsHandle(req, res);
         }
     }
-}).listen("8888", "10.11.51.202", () => {
-    console.log("run server at http://10.11.51.202:8888");
+}).listen("8888", "127.0.0.1", () => {
+    console.log("run server at http://127.0.0.1:8888");
 })
 
 function random(a, b) {
@@ -60,6 +61,7 @@ function ajaxHandle(req, res) {
                 return;
             })
         }
+        console.log(userMsg)
         if (data.type == "regist") {
             let flag = 1;
             let json = {};
@@ -126,6 +128,101 @@ function ajaxHandle(req, res) {
             }
             res.end();
         }
+        if (data.type == "addShop") {
+            let flag = 0;
+            let index;
+            let iNow;
+            let json = {};
+            if (userMsg.length >= 1) {
+                for (var i in userMsg) {
+                    if (data.token == userMsg[i].token) {
+                        flag = 1;
+                        index = i;
+                    }
+                }
+                if (flag = 1) {
+                    let json = {};
+                    json.user = userMsg[index].user;
+                    json.goodid = data.goodid;
+                    json.num = data.num;
+                    console.log(json)
+                    if (userShop.length < 1) {
+                        userShop.push({
+                            user: json.user,
+                            shop: [{
+                                goodid: json.goodid,
+                                num: json.num
+                            }]
+                        })
+                        iNow = 0;
+                    } else {
+                        let flag = 0;
+                        let nameflag = 0;
+                        let index = 0;
+                        for (var j in userShop) {
+                            if (userShop[j].user == json.user) {
+                                nameflag = 1;
+                                index = j;
+                                iNow = j;
+                            }
+                        }
+                        if (nameflag) {
+                            let users = userShop[index].shop;
+                            for (var j in users) {
+                                if (users[j].goodid == json.goodid) {
+                                    flag = 1;
+                                    users[j].num = parseInt(users[j].num) + parseInt(json.num);
+                                }
+                            }
+                            if (!flag) {
+                                users.push({
+                                    goodid: json.goodid,
+                                    num: json.num
+                                })
+                            }
+                        } else {
+                            userShop.push({
+                                user: json.user,
+                                shop: [{
+                                    goodid: json.goodid,
+                                    num: json.num
+                                }]
+                            })
+                            iNow = userShop.length - 1;
+                        }
+
+                    }
+                }
+            }
+            res.write(JSON.stringify(userShop[iNow]));
+            res.end();
+        }
+        if (data.type == "showNum") {
+            let flag = 0;
+            let index;
+            let shopindex;
+            for (var i in userMsg) {
+                if (data.token == userMsg[i].token) {
+                    flag = 1;
+                    index = i;
+                }
+            }
+            if (flag = 1) {
+                let json = userMsg[index].user;
+                for (var i in userShop) {
+                    if (json == userShop[i].user) {
+                        flag = 0;
+                        shopindex = i;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    res.write(JSON.stringify(userShop[shopindex]));
+                }
+            }
+            res.end();
+        }
+
     })
 }
 
