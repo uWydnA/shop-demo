@@ -8,13 +8,14 @@ const uglify = require("gulp-uglify");
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
 const proxy = require("http-proxy-middleware");
+const livereload = require("gulp-livereload");
 
 function indexFn(end) {
-    gulp.src(["src/images/*"]).pipe(gulp.dest("server/images")).pipe(connect.reload());
-    gulp.src(["src/*.html"]).pipe(gulp.dest("server")).pipe(connect.reload());
-    gulp.src(["src/json/*.json"]).pipe(gulp.dest("server/json")).pipe(connect.reload());
-    gulp.src(["src/js/*.js"]).pipe(gulp.dest("server/js")).pipe(connect.reload());
-    gulp.src(["src/libs/*.js"]).pipe(gulp.dest("server/libs")).pipe(connect.reload());
+    gulp.src(["src/images/*"]).pipe(gulp.dest("server/images")).pipe(livereload());
+    gulp.src(["src/*.html"]).pipe(gulp.dest("server")).pipe(livereload());
+    gulp.src(["src/json/*.json"]).pipe(gulp.dest("server/json")).pipe(livereload());
+    gulp.src(["src/js/*.js"]).pipe(gulp.dest("server/js")).pipe(livereload())
+    gulp.src(["src/libs/*.js"]).pipe(gulp.dest("server/libs")).pipe(livereload());
     // gulp.src(["src/js/index.js"]).pipe(gulp.dest("server/js")).pipe(uglify()).pipe(rename("index.min.js")).pipe(gulp.dest("server/js")).pipe(connect.reload());
     end();
 }
@@ -80,7 +81,7 @@ function fsHandle(req, res) {
 
 
 function sassFn() {
-    return gulp.src(["src/sass/*"]).pipe(sass()).pipe(gulp.dest("server/css")).pipe(connect.reload());
+    return gulp.src(["src/sass/*"]).pipe(sass()).pipe(gulp.dest("server/css")).pipe(livereload());
 }
 
 

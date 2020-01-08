@@ -1,7 +1,7 @@
-require(["js/getCookies", "js/ajax"], function (gc, aj) {
+require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc, aj, move, sc) {
     class Product {
         constructor() {
-            this.cztUrl = "http://10.11.51.202:8888/api";
+            this.cztUrl = "http://127.0.0.1:8888/api";
             this.title = document.querySelector("head title")
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
@@ -11,6 +11,11 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.div = document.createElement("div");
+            this.move = move;
+            this.cartNum = document.querySelector("#cartNum");
+            this.shopcar = document.querySelector(".shopcar");
+            this.addCart = document.querySelector("#addCart");
             this.titlename = document.querySelector(".title");
             this.price = document.querySelector(".price");
             this.goods = document.querySelector(".goods-name h1");
@@ -33,6 +38,7 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
             this.reduce = document.querySelector("#reduce");
             this.addnum = document.querySelector("#addnum");
             this.t1;
+            this.t2;
             this.index = 0;
             this.indexPrev;
             this.cztr = document.querySelector("#main .main-czt .czt-r ul");
@@ -44,7 +50,14 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
         init() {
             let that = this;
             let getCookie = gc;
+            let num = 0;
             // this.proClass.style.height = "auto";
+            let shoparr = getCookie.init({
+                key: "shop"
+            })
+            let token = getCookie.init({
+                key: "token"
+            })
             let key = getCookie.init({
                 key: "token"
             });
@@ -131,9 +144,25 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
                     }
                 }
             })
+            ajax.init({
+                url: that.cztUrl,
+                data: {
+                    token: token,
+                    type: "showNum",
+                    goodid: goodid,
+                }
+            }).then((res) => {
+                that.req = JSON.parse(res)
+                for (var i in that.req.shop) {
+                    num += parseInt(that.req.shop[i].num);
+                }
+                that.cartNum.innerHTML = num;
+            })
         }
         addEvent() {
             var that = this;
+            let statX;
+            let statY;
             for (var i = 0; i < this.ali.length; i++) {
                 this.ali[i].index = i;
                 this.ali[i].onmouseover = function (eve) {
@@ -209,7 +238,70 @@ require(["js/getCookies", "js/ajax"], function (gc, aj) {
                     that.itemnumber.value--;
                 }
             }
+            this.addCart.onclick = function () {
+                let num = that.itemnumber.value;
+                console.log(num)
+                let ajax = aj;
+                let setcook = sc;
+                let arr = [];
+                let getCookie = gc;
+                let token = getCookie.init({
+                    key: "token"
+                })
+                let cook = getCookie.init({
+                    key: "goodId"
+                })
+                console.log(ajax.init)
+                that.div.style.display = "block";
+                let clientX = document.documentElement.clientWidth;
+                let clientY = document.documentElement.clientHeight;
+                for (var i = 0; i < that.apicture.length; i++) {
+                    if (that.apicture[i].children[0].className == "itemborder") {
+                        that.div.innerHTML = that.apicture[i].children[0].outerHTML;
+                        that.div.className = "divimg";
+                        document.body.appendChild(that.div)
+                    }
 
+                }
+                if (!statY) {
+                    statY = that.div.offsetTop - that.shopcar.offsetTop;
+                }
+                if (!statX) {
+                    statX = (clientX - that.shopcar.offsetWidth) - that.div.offsetLeft;
+                }
+                that.move.init({
+                    dom: that.div,
+                    data: {
+                        left: clientX,
+                        top: statY,
+                        width: 0,
+                        height: 0
+                    },
+                    end: function () {
+                        that.div.setAttribute("style", "");
+                        that.div.className = "divimg";
+                        ajax.init({
+                            url: that.cztUrl,
+                            data: {
+                                token: token,
+                                type: "addShop",
+                                goodid: cook,
+                                num: num
+                            }
+                        }).then((res) => {
+                            let num = 0;
+                            that.req = JSON.parse(res)
+                            for (var i in that.req.shop) {
+                                num += parseInt(that.req.shop[i].num);
+                            }
+                            that.cartNum.innerHTML = num;
+                        })
+                    }
+                })
+            }
+            this.shopcar.onclick = function () {
+                location.assign("shop.html")
+            }
         }
     }
     new Product();

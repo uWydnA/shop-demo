@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="css/shop.css">
+</head>
+
+<body>
+    <div id="tool">
+        <div class="margin clear">
+            <div class="tool-l">
+                <div class="logo">百联集团旗下全渠道电商平台</div>
+                <div href="##" class="tool-l-t">
+                    <span>网站导航</span>
+                    <i></i>
+                    <span class="left-span"></span>
+                    <div class="divshow left-show">
+                        <div class="left-show-dl">
+                            <dl>
+                                <dd><a target="_blank" href="http://www.bailiangroup.cn/">百联集团官网</a></dd>
+                                <dd><a target="_blank" href="http://www.safepass.cn/">安付宝网</a></dd>
+                                <dd><a target="_blank" href="http://www.dyyy.com.cn/">第一医药</a></dd>
+                                <dd><a target="_blank" href="https://www.okcard.com/clogin">OK会员卡专区</a></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <a href="##" class="tool-info">
+                    <span>消息</span>
+                </a>
+            </div>
+            <div class="tool-r">
+                <ul class="nav">
+                    <li><i class="boxi"></i><a href="login.html" class="login">请登录</a><a href="regist.html">注册</a></li>
+                    <li><a href="#">我的订单</a></li>
+                    <li><a href="#">我的百联</a><i></i>
+                        <span class="left-span"></span>
+                        <div class="divshow hdiv">
+                            <dl>
+                                <dd><a target="_blank" href="https://my.bl.com/ym/orderList.html">我的订单</a></dd>
+                                <dd><a target="_blank" href="https://my.bl.com/ym/commentList.html">我的评价</a></dd>
+                                <dd><a target="_blank" href="https://my.bl.com/ym/nl/memberPointList.html">我的积分</a></dd>
+                                <dd><a target="_blank" href="https://my.bl.com/favorite/myFavorite.html">我的收藏</a></dd>
+                                <dd><a target="_blank" href="https://my.bl.com/center/series/myCoupon.html">我的优惠券</a>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                    <li><a href="#">充值缴费</a><i></i>
+                        <span class="left-span"></span>
+                        <div class="divshow pay">
+                            <dl class="pay-dl">
+                                <dd>
+                                    <div class="pay-title">水电煤缴费</div>
+                                    <div class="pay-head">
+                                        <a target="_blank" href="https://jiaofei.bl.com">缴费首页</a>
+                                        <a target="_blank"
+                                            href="https://jiaofei.bl.com/syf/pubfeepage.html?type=sf">水费缴费</a>
+                                        <a target="_blank"
+                                            href="https://jiaofei.bl.com/syf/pubfeepage.html?type=dl">电费缴费</a>
+                                        <a target="_blank"
+                                            href="https://jiaofei.bl.com/syf/pubfeepage.html?type=mq">燃气缴费</a>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <div class="pay-title">手机充值</div>
+                                    <div class="pay-head">
+                                        <a target="_blank" href="https://chongzhi.bl.com/cz/czpage.html">手机充值</a>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <div class="pay-title">其他缴费</div>
+                                    <div class="pay-head">
+                                        <a target="_blank"
+                                            href="https://jiaofei.bl.com/other/otherfee.html?type=tel">固话/宽带充值</a>
+                                        <a target="_blank"
+                                            href="https://jiaofei.bl.com/other/otherfee.html?type=tt">铁通缴费</a>
+                                        <a target="_blank"
+                                            href="https://jiaofei.bl.com/other/otherfee.html?type=ds">有线电视缴费</a>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <div class="pay-title">游戏点卡</div>
+                                    <div class="pay-head">
+                                        <a target="_blank"
+                                            onclick="clickButton('腾讯Q币充值',null,null,'首页top','PC_Fees',null);"
+                                            href="https://chongzhi.bl.com/game/gamerechange.html?version=v1">腾讯Q币充值</a>
+                                        <a target="_blank"
+                                            href="https://chongzhi.bl.com/game/capassgame.html?dsplb=01108&amp;dsphh=364009">盛大点券充值</a>
+                                        <a target="_blank"
+                                            href="https://chongzhi.bl.com/game/gameshoplist.html">更多游戏</a>
+                                    </div>
+                                </dd>
+
+                            </dl>
+                        </div>
+                    </li>
+                    <li><a href="#">客户服务</a><i></i>
+                        <span class="left-span"></span>
+                        <div class="divshow hdiv">
+                            <dl>
+                                <dd><a href="javascript:void(0);" class="c_ntkf">在线客服</a></dd>
+                                <dd><a target="_blank" href="https://help.bl.com/helpCentersv7.html">帮助中心</a></dd>
+                            </dl>
+                        </div>
+                    </li>
+                    <li><a href="#">掌上百联</a><i></i>
+                        <span class="left-span"></span>
+                        <div class="divshow palm">
+                            <div class="palm-item">
+                                <span class="palm-item-img"><img
+                                        src="https://img23.iblimg.com/market-2/images/activity/1807592795.jpg"
+                                        width="100" height="100"></span>
+                                <div class="palm-item-line">
+                                    <apan class="palm-item-title">i百联微信</apan>
+                                </div>
+                                <div class="palm-item-line">
+                                    <apan class="palm-item-message">扫一扫关注</apan>
+                                </div>
+                            </div>
+                            <div class="palm-item">
+                                <span class="palm-item-img"><img
+                                        src="https://img22.iblimg.com/market-2/images/activity/1849148942.png"
+                                        width="100" height="100"></span>
+                                <div class="palm-item-line">
+                                    <apan class="palm-item-title">i百联APP</apan>
+                                </div>
+                                <div class="palm-item-line">
+                                    <apan class="palm-item-message">手机购物更方便</apan>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">购物车</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="trade-head">
+        <div class="wrap">
+            <div class="logo cc_cursor">
+                <a href="https://www.bl.com">
+                    <img src="https://res13.iblimg.com/respc-1/resources/v3.0/css/i/logo.png">
+                </a>
+            </div>
+            <div class="name cc_cursor">购物车</div>
+            <div class="login-message cc_cursor"> 现在&nbsp;<a href="javascript:void(0);">登录</a>,您购物车中的商品将会被永久保存</div>
+            <input type="hidden" id="isLogin" name="isLogin" value="false">
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="cart-title cc_cursor">
+            <input type="hidden" id="orderAmount" value="1352">
+            <input type="hidden" id="btnTag" value="">
+            <div class="name">全部商品<span>1</span></div>
+            <div class="send-message cc_cursor">
+                <div class="message-name cc_cursor">配送至</div>
+                <div class="address-line cc_cursor">
+                    <div class="address-name cc_pointer">
+                        <span id="provinceName">
+                            上海市
+                            <input class="provinceId" value="866" type="hidden">
+                        </span>
+                        <span id="cityName">
+                            市直辖
+                            <input class="cityId" value="867" type="hidden">
+                        </span>
+                        <span id="districtName">
+                            黄浦区
+                            <input class="districtId" value="868" type="hidden">
+                        </span>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-table cc_cursor">
+            <div class="cart-head cc_cursor">
+                <label class="chk-line select">
+                    <div class="chk cc_pointer" onclick="checkBox(this)"></div>
+                    <span class="name">全选</span>
+                </label>
+                <div class="item cc_cursor">商品信息</div>
+                <div class="item-price cc_cursor">单价（元）</div>
+                <div class="number cc_cursor">件数</div>
+                <div class="total-price cc_cursor">金额（元）</div>
+                <div class="action cc_cursor">操作</div>
+            </div>
+            <div class="cart-table-name"><label id="zu" class="chk-line select">
+                    <div class="chk goodsid_3246106" onclick="checkBox(this)"></div> <i class="bl"></i> <span
+                        class="name">i百联自营</span>
+                </label>
+                <div class="package-message">
+                    <div class="package-price">
+                        <div class="price price_ok cc_cursor">已免运费</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="cart-table-list">
+            </ul>
+
+        </div>
+        <div class="pay-form" id="payForm" style="display: block;">
+            <div class="pay-line cc_cursor">
+                <div class="select-all select">
+                    <div class="chk" onclick="checkBox(this)"></div>
+                    <div class="txt">全选</div>
+                </div>
+                <a class="txt delete cc_pointer"><i></i>删除</a>
+                <a class="txt">清除失效商品</a>
+                <a class="txt">移入收藏夹</a>
+                <a class="pay" onclick="payButton(this)">去结算</a>
+                <div class="message">
+                    <div class="price-line cc_cursor">
+                        <span class="black">合计：</span>
+                        <span class="price"><i>¥</i><strong class="zongjia">1352.00</strong></span>
+                    </div>
+                    <div class="reduce-line cc_cursor">
+                        <span class="grey cc_cursor">已优惠：</span>
+                        <span class="black cc_cursor">-<i>¥</i>0.00</span>
+                    </div>
+                </div>
+                <a class="item-show">
+                    <input value="4" type="hidden" class="totalcheckedGoodsNumber">
+                    已选择
+                    <span>4</span>
+                    件商品
+                    <!-- <i class="up"></i> -->
+                </a>
+            </div>
+        </div>
+        <div class="guessLike"></div>
+        <div id="package-add-1" class="package-add" style="display: none;"></div>
+    </div>
+    <div id="footer" class="footer">
+        <div class="helpnav clear cc_cursor">
+            <div class="wrap">
+                <div class="footer-center">
+                    <div class="helpnav-list">
+                        <div class="helpnav-title">
+                            <i class="footic1"></i>
+                            新手入门
+                        </div>
+                        <ul>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=261&amp;&amp;categoryType=help"
+                                    target="_blank">购物流程</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=262&amp;&amp;categoryType=help"
+                                    target="_blank">会员介绍</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=263&amp;&amp;categoryType=help"
+                                    target="_blank">常见问题</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=264&amp;&amp;categoryType=help"
+                                    target="_blank">发票说明</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=265&amp;&amp;categoryType=help"
+                                    target="_blank">联系客服</a></li>
+                        </ul>
+                    </div>
+                    <div class="helpnav-list">
+                        <div class="helpnav-title">
+                            <i class="footic2"></i>
+                            配送服务
+                        </div>
+                        <ul>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=275&amp;&amp;categoryType=help"
+                                    target="_blank">配送范围及运费</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=278&amp;&amp;categoryType=help"
+                                    target="_blank">配送进度查询</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=276&amp;&amp;categoryType=help"
+                                    target="_blank">自提服务</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=277&amp;&amp;categoryType=help"
+                                    target="_blank">商品验货与签收</a></li>
+                        </ul>
+                    </div>
+                    <div class="helpnav-list">
+                        <div class="helpnav-title">
+                            <i class="footic3"></i>
+                            支付方式
+                        </div>
+                        <ul>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=279&amp;&amp;categoryType=help"
+                                    target="_blank">货到付款</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=280&amp;&amp;categoryType=help"
+                                    target="_blank">在线支付</a></li>
+                        </ul>
+                    </div>
+                    <div class="helpnav-list">
+                        <div class="helpnav-title">
+                            <i class="footic4"></i>
+                            售后服务
+                        </div>
+                        <ul>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=281&amp;&amp;categoryType=help"
+                                    target="_blank">退换货政策</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=282&amp;&amp;categoryType=help"
+                                    target="_blank">退换货流程</a></li>
+                            <li><a href="https://help.bl.com/articleDetailed.html?articleId=283&amp;&amp;categoryType=help"
+                                    target="_blank">退款说明</a></li>
+                        </ul>
+                    </div>
+                    <div class="helpnav-list">
+                        <div class="helpnav-title">
+                            <i class="footic5"></i>
+                            商家支持
+                        </div>
+                        <ul>
+                            <li><a href="https://help.bl.com/toHelpCenter/queryCategoryId.html?categoryId=382&amp;&amp;categoryType=help"
+                                    target="_blank">商家入驻</a></li>
+                            <li><a href="https://help.bl.com/toHelpCenter/queryCategoryId.html?categoryId=401&amp;&amp;categoryType=help"
+                                    target="_blank">商家规则</a></li>
+                            <li><a href="https://help.bl.com/toHelpCenter/queryCategoryId.html?categoryId=345&amp;&amp;categoryType=help"
+                                    target="_blank">商家常见问题</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-nav">
+            <div>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=285&amp;&amp;categoryType=about">关于我们</a>
+                <span>|</span>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=286&amp;&amp;categoryType=about">联系我们</a>
+                <span>|</span>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=287&amp;&amp;categoryType=about">加盟合作</a>
+                <span>|</span>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=288&amp;&amp;categoryType=about">诚征英才</a>
+                <span>|</span>
+                <a target="_blank"
+                    href="https://help.bl.com/articleDetailed.html?articleId=289&amp;&amp;categoryType=about">友情链接</a>
+                <span>|</span>
+                <a target="_blank" href="https://www.bl.com/newretail.html">新零售合作</a>
+            </div>
+            <div class="copyright">百联集团有限公司版权所有 <span>|</span> 客服电话：400-900-8800 <span>|</span> <a
+                    href="http://www.beian.miit.gov.cn" target="_blank">沪ICP备15028847号-1</a></div>
+            <a target="_blank" href="https://res12.iblimg.com/respc-1/resources/v4.0/img/yaopingzigezheng.png"
+                class="drug-message">互联网药品信息服务资质证书编号：沪-（非营业性）-2016-0044</a><br>
+            <a target="_blank" href="https://promotion.bl.com/nc/PC_HDGL20180705000005986_6252.html"
+                class="drug-message">全渠道增值电信业务经营许可证</a>
+            <div class="police">
+                <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010102002366" target="_blank">
+                    <img src="https://res13.iblimg.com/respc-1/resources/v4.0/css/i/gongan.png">
+                    <span style="">沪公网安备 31010102002366号</span>
+                </a>
+                <a href="http://218.242.124.22:8081/businessCheck/verifKey.do?showType=extShow&amp;serial=9031000020160729145737000001099658-SAIC_SHOW_310000-20160406145114141192&amp;signData=MEYCIQCUhx+ulQL4t9jJgfgCH1oeTxexuWOVww3Hel3/UlRyLQIhAO2fVtZDl0EkYb0p/3M50cXqe694wDQoJNuUKNdQNOWf"
+                    target="_blank">
+                    <img src="https://res14.iblimg.com/respc-1/resources/v4.1/widget/footer1200/i/gongs.png" width="20"
+                        height="21">
+                    <span style="">上海工商</span>
+                </a>
+                <a target="_blank" href="https://promotion.bl.com/nc/PC_HDGL20170407000001552_1592.html">
+                    <img src="https://res15.iblimg.com/respc-1/resources/v4.1/widget/footer1200/i/zhizhao.png">
+                    <span style="">经营执照</span>
+                </a>
+                <a href="http://scjgj.sh.gov.cn/platform/survey/step1_phone" target="_blank">
+                    <img src="https://res12.iblimg.com/respc-1/resources/v4.1/widget/footer1200/i/wangjing1.png"
+                        width="21">
+                    <span style="">网购大家评</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="libs/require.js"></script>
+<script src="js/shop.js"></script>
+
+</html>

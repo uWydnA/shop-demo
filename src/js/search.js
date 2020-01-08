@@ -1,7 +1,7 @@
 require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
     class Search {
         constructor() {
-            this.cztUrl = "http://10.11.51.202:8888/api";
+            this.cztUrl = "http://127.0.0.1:8888/api";
             this.title = document.querySelector("head title")
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
@@ -36,7 +36,6 @@ require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
         init() {
             let that = this;
             let getCookie = gc;
-            this.proClass.style.height = "auto";
             let key = getCookie.init({
                 key: "token"
             });
@@ -90,7 +89,6 @@ require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
                 that.rec = that.res;
                 that.display();
             })
-
 
         }
         addEvent() {
