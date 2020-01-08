@@ -18,7 +18,7 @@ require(["js/ajax", "js/setCookie"], function (getp, gc) {
 
                 } else {
                     that.user.className = " inp inp-primaryclick radius cc_cursor inp-primary inp-primaryblur "
-                    that.result.push("1");
+                    that.result[0] = "1";
                 }
             }
             this.pass.onfocus = function () {
@@ -29,7 +29,7 @@ require(["js/ajax", "js/setCookie"], function (getp, gc) {
                     that.pass.className = " inp inp-primaryclick radius cc_cursor inp-primary inp-primaryblur errer"
                 } else {
                     that.pass.className = " inp inp-primaryclick radius cc_cursor inp-primary inp-primaryblur "
-                    that.result.push("1");
+                    that.result[1] = "1";
                 }
             }
             this.btn.onclick = function () {
@@ -42,7 +42,7 @@ require(["js/ajax", "js/setCookie"], function (getp, gc) {
                 if (str == 2) {
                     let ajax = getp;
                     ajax.init({
-                        url: "http://10.11.51.202:8888/api",
+                        url: "http://127.0.0.2:8888/api",
                         data: {
                             type: "login",
                             user: that.user.value,

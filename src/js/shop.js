@@ -1,7 +1,7 @@
 require(["js/ajax", "js/getCookies"], function (aj, gc) {
     class Shop {
         constructor() {
-            this.cztUrl = "http://10.11.51.202:8888/api";
+            this.cztUrl = "http://127.0.0.2:8888/api";
             this.title = document.querySelector("head title")
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
@@ -118,16 +118,19 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                     }
                 }).then((res) => {
                     let str = "";
+                    let num = -1;
                     that.res = JSON.parse(res);
                     for (var i in that.res[0].val) {
+
                         for (var j in json) {
                             if (that.res[0].val[i].goodId == json[j].goodid) {
+                                num++;
                                 let sum = that.res[0].val[i].price * json[j].num;
                                 str += `   <li class="clear" style="background-color: #FFFAF1;">
                                 <div id="pr-zh" class="item select">
                                     <div class="cart-table-line">
                                         <div class="chk-line">
-                                            <div index="${i}" class="checkbox chk goodsid_${that.res[0].val[i].goodId}" ></div>
+                                            <div index="${num}" class="checkbox chk goodsid_${that.res[0].val[i].goodId}" ></div>
                                         </div>
                                         <div class="item-box"><a target="blank" href="http://product.bl.com/3246106.html"
                                                 title="索尼（SONY）PlayStation 4 游戏手柄 水晶蓝（PS4）"> <img
@@ -145,14 +148,14 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                                         <div class="number-box">
                                             <div 
                                            class="input-line"><em class="reduce" 
-                                           index = "${i}"id="reduce_${that.res[0].val[i].goodId}"
+                                           index = "${num}"id="reduce_${that.res[0].val[i].goodId}"
                                                    >-</em> <input class="text"
                                                      type="text" value="${json[j].num}"> <em 
-                                                     index = "${i}"class="add"
+                                                     index = "${num}"class="add"
                                                     id="add_${that.res[0].val[i].goodId}" >+</em></div>
                                         </div>
                                         <div class="price-box cc_cursor">
-                                            <div class="price cc_cursor sumprice" index = "${i}"
+                                            <div class="price cc_cursor sumprice" index = "${num}"
                                             show = "1"    
                                             >¥${sum}</div>
                                         </div>
@@ -187,8 +190,11 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
 
                     var t = target.parentNode.children[1].value >= 2 ? target.parentNode.children[1].value-- : target.parentNode.children[1].value;
                     var index = target.getAttribute("index");
+                    console.log(index);
+                    console.log(that.asum[index])
                     that.asum[index].innerHTML = `￥${target.parentNode.children[1].value * parseInt(that.aprice[index].innerHTML.slice(1, that.aprice[index].innerHTML.length - 1))}`;
                     that.changeMoney();
+
                 }
                 if (target.className == "add") {
                     target.parentNode.children[1].value++;

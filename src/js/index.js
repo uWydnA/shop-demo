@@ -1,7 +1,7 @@
 require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (swiper, gc, aj, sc, move) {
     class Shop {
         constructor() {
-            this.cztUrl = "http://10.11.51.202:8888/api";
+            this.cztUrl = "http://127.0.0.2:8888/api";
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
             this.bol = document.querySelector(".progress-bar-ol")
@@ -213,18 +213,20 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                         that.menuli[i].style.display = "none";
                     }
                     that.menuli[this.index].style.display = "block";
-                    console.log(this.index)
-                    that.menudata.style.opacity = "1";
+                    that.menudata.style.display = "block";
                 }
                 this.ali[i].onmouseout = function (eve) {
                     var e = eve || window.event;
                     var target = e.target || e.srcElement;
                     e.stopPropagation();
-                    that.menudata.style.opacity = "0";
+                    that.menudata.style.display = "none";
                 }
             }
-            this.menudata.onmouseenter = function () {
-                this.style.opacity = "1";
+            this.menudata.onmouseover = function () {
+                this.style.display = "block";
+            }
+            this.menudata.onmouseout = function () {
+                this.style.display = "none";
             }
             onscroll = function (eve) {
                 var e = eve || window.event;
@@ -254,8 +256,9 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
 
             this.floor.children[0].onclick = function () {
                 let speed;
-                clearInterval(this.t)
-                this.t = setInterval(() => {
+                clearInterval(this.t1)
+                clearInterval(that.floor.children[1].t2)
+                this.t1 = setInterval(() => {
                     speed = Math.abs((that.mainczt.offsetTop - document.documentElement.scrollTop) / 20);
                     speed = speed < 1 ? 1 : speed;
                     console.log(speed)
@@ -266,20 +269,21 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                     }
                     if (Math.abs(that.mainczt.offsetTop - document.documentElement.scrollTop) <= speed) {
                         document.documentElement.scrollTop = that.mainczt.offsetTop
-                        clearInterval(this.t)
+                        clearInterval(this.t1)
                     }
                 }, 13);
             }
             this.floor.children[1].onclick = function () {
                 let speed;
-                clearInterval(this.t)
-                this.t = setInterval(() => {
+                clearInterval(that.floor.children[0].t1)
+                clearInterval(this.t2)
+                this.t2 = setInterval(() => {
                     speed = (that.like.offsetTop - document.documentElement.scrollTop) / 20;
                     speed = speed < 1 ? 1 : speed;
                     document.documentElement.scrollTop += speed;
                     if (that.like.offsetTop - document.documentElement.scrollTop <= speed) {
                         document.documentElement.scrollTop = that.like.offsetTop
-                        clearInterval(this.t)
+                        clearInterval(this.t2)
                     }
                 }, 13);
             }

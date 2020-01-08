@@ -22,10 +22,11 @@ require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rche
                 that.user.className = "";
                 let res = creg;
                 let reg = /[a-z0-9A-Z]{6,20}/;
-                that.result.push((res.init({
+                that.result[0] = ((res.init({
                     dom: that.user,
                     reg: reg
                 })));
+
             }
             this.pass.onfocus = function () {
                 let dom = f;
@@ -37,7 +38,7 @@ require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rche
                 that.pass.className = "";
                 let res = creg;
                 let reg = /[a-z0-9A-Z]{8,20}/;
-                that.result.push((res.init({
+                that.result[1] = ((res.init({
                     dom: that.pass,
                     reg: reg,
                     flag: 1,
@@ -54,7 +55,7 @@ require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rche
                 that.enpass.className = "";
                 let res = creg;
                 let reg = /[a-z0-9A-Z]{8,20}/;
-                that.result.push((res.init({
+                that.result[2] = ((res.init({
                     dom: that.enpass,
                     reg: reg,
                     flag: 1,
@@ -71,7 +72,7 @@ require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rche
                 that.num.className = "";
                 let res = creg;
                 let reg = /^1[3-9][0-9]{9}$/;
-                that.result.push((res.init({
+                that.result[3] = ((res.init({
                     dom: that.num,
                     reg: reg
                 })));
@@ -86,13 +87,14 @@ require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rche
                 that.email.className = "";
                 let res = creg;
                 let reg = /^\w{2,10}@[0-9a-z]{2,10}(\.[a-z]{2,3}){1,2}$/;
-                that.result.push((res.init({
+                that.result[4] = ((res.init({
                     dom: that.email,
                     reg: reg
                 })));
             }
             this.btn.onclick = function () {
                 let str = 0;
+                console.log(that.result);
                 for (var i in that.result) {
                     if (that.result[i] == 1) {
                         str++;

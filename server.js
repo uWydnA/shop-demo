@@ -2,7 +2,15 @@ const http = require("http");
 const fs = require("fs");
 const url = require("url");
 const querystring = require("querystring");
-let userMsg = [];
+let userMsg = [{
+    type: 'regist',
+    user: 'admin',
+    pass: 'admin',
+    num: '18084023123',
+    email: 'wudao72612@sina.com',
+    __retr0__: '1578490660150',
+    token: 'b95Sb2WQHyHeU1nW23qI743IJzVQGfEsH2PvU4ffET5Yo3P7X7ZrH81VDON11rA4'
+}];
 let userShop = [];
 http.createServer((req, res) => {
     if (req.url != "/favicon.ico") {
@@ -13,8 +21,8 @@ http.createServer((req, res) => {
             fsHandle(req, res);
         }
     }
-}).listen("8888", "10.11.51.202", () => {
-    console.log("run server at http://10.11.51.202:8888");
+}).listen("8888", "127.0.0.2", () => {
+    console.log("run server at http://127.0.0.2:8888");
 })
 
 function random(a, b) {
@@ -61,7 +69,6 @@ function ajaxHandle(req, res) {
                 return;
             })
         }
-        console.log(userMsg)
         if (data.type == "regist") {
             let flag = 1;
             let json = {};
@@ -111,7 +118,7 @@ function ajaxHandle(req, res) {
         }
         if (data.type == "findToken") {
             let flag = 0;
-            let index;
+            let index = 0;
             let json = {};
             if (userMsg.length >= 1) {
                 for (var i in userMsg) {
@@ -145,7 +152,6 @@ function ajaxHandle(req, res) {
                     json.user = userMsg[index].user;
                     json.goodid = data.goodid;
                     json.num = data.num;
-                    console.log(json)
                     if (userShop.length < 1) {
                         userShop.push({
                             user: json.user,
@@ -199,7 +205,7 @@ function ajaxHandle(req, res) {
         }
         if (data.type == "showNum") {
             let flag = 0;
-            let index;
+            let index = 0;
             let shopindex;
             for (var i in userMsg) {
                 if (data.token == userMsg[i].token) {
