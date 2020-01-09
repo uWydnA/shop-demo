@@ -1,9 +1,11 @@
-require(["js/ajax", "js/setCookie"], function (getp, gc) {
+require(["js/ajax", "js/setCookie", "js/getCookies"], function (getp, gc, g) {
     class Login {
         constructor() {
             this.user = document.querySelector("#loginId");
             this.pass = document.querySelector("#password");
             this.btn = document.querySelector(".loginbtn");
+            this.visshop = JSON.parse(sessionStorage.getItem("visshop")) || [];
+            this.ajax = getp;
             this.result = [];
             this.addEvent();
         }
@@ -50,6 +52,7 @@ require(["js/ajax", "js/setCookie"], function (getp, gc) {
                         }
                     }).then((res) => {
                         that.res = JSON.parse(res);
+                        console.log(that.res)
                         if (that.res.code == "11") {
                             that.res = that.res.msg;
                             let set = gc;
@@ -57,10 +60,29 @@ require(["js/ajax", "js/setCookie"], function (getp, gc) {
                                 key: "token",
                                 val: that.res
                             });
-                            setTimeout(() => {
-                                location.assign("index.html")
-                            }, 100)
+                            let getc = g;
+                            let token = getc.init({
+                                key: "token"
+                            })
 
+                            if (that.visshop.length >= 1) {
+                                that.ajax.init({
+                                    url: "http://10.11.51.202:8888/api",
+                                    data: {
+                                        token: token,
+                                        type: "firstPush",
+                                        shop: JSON.stringify(that.visshop)
+                                    }
+                                }).then((res) => {
+                                    console.log(res);
+                                    console.log(JSON.parse(res))
+                                    if (res) {
+                                        sessionStorage.removeItem("visshop")
+
+                                    }
+                                })
+                            }
+                            location.assign("index.html");
                         }
                         if (that.res.code == "10") {
                             console.log(1)

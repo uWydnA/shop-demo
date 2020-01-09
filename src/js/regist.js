@@ -1,4 +1,4 @@
-require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rcheck, get, creg, f) {
+require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus", "js/getCookies"], function (rcheck, get, creg, f, g) {
     class Regist {
         constructor() {
             this.btn = document.querySelector("#subbtn");
@@ -6,7 +6,9 @@ require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rche
             this.pass = document.querySelector("#loginPass");
             this.enpass = document.querySelector("#loginenpass");
             this.num = document.querySelector("#loginnum");
+            this.ajax = get;
             this.email = document.querySelector("#loginEmail");
+            this.visshop = JSON.parse(sessionStorage.getItem("visshop")) || [];
             this.result = [];
             this.addEvent();
         }
@@ -94,7 +96,6 @@ require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rche
             }
             this.btn.onclick = function () {
                 let str = 0;
-                console.log(that.result);
                 for (var i in that.result) {
                     if (that.result[i] == 1) {
                         str++;
@@ -109,8 +110,45 @@ require(["js/redistCheck", "js/ajax", "js/reg", "js/inputFocus"], function (rche
                         num: that.num,
                         email: that.email
                     });
-
+                    // if (that.visshop.length >= 1) {
+                    //     that.ajax.init({
+                    //         url: "http://10.11.51.202:8888/api",
+                    //         data: {
+                    //             type: "login",
+                    //             user: that.user.value,
+                    //             pass: that.pass.value
+                    //         }
+                    //     }).then((res) => {
+                    //         that.res = JSON.parse(res);
+                    //         if (that.res.code == "11") {
+                    //             that.res = that.res.msg;
+                    //             let set = gc;
+                    //             set.init({
+                    //                 key: "token",
+                    //                 val: that.res
+                    //             });
+                    //             let getc = g;
+                    //             let token = getc.init({
+                    //                 key: "token"
+                    //             })
+                    //             that.ajax.init({
+                    //                 url: that.cztUrl,
+                    //                 data: {
+                    //                     token: token,
+                    //                     type: "firstPush",
+                    //                     shop: that.visshop
+                    //                 }
+                    //             }).then((res) => {
+                    //                 console.log(res)
+                    //             })
+                    //         }
+                    //         if (that.res.code == "10") {
+                    //             console.log(1)
+                    //         }
+                    //     })
+                    // }
                 }
+
             }
         }
     }

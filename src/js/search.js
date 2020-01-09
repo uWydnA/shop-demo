@@ -19,6 +19,7 @@ require(["js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (gc, a
             this.selectbg = document.querySelector(".selectbg");
             this.menudata = document.querySelector("div #menuData");
             this.rside = document.querySelector("#rside");
+            this.visshop = JSON.parse(sessionStorage.getItem("visshop")) || [];
             this.topbox = document.querySelector("#navbox");
             this.select = document.querySelector(".select");
             this.ali = document.querySelectorAll(".selectli");
@@ -39,6 +40,7 @@ require(["js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (gc, a
         }
         init() {
             let that = this;
+            let num = 0;
             let getCookie = gc;
             let key = getCookie.init({
                 key: "token"
@@ -80,6 +82,9 @@ require(["js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (gc, a
                     let num = 0;
                     if (res) {
                         that.req = JSON.parse(res)
+                        if (typeof that.req.shop == "string") {
+                            that.req.shop = JSON.parse(that.req.shop)
+                        }
                         for (var i in that.req.shop) {
                             num += parseInt(that.req.shop[i].num);
                         }
@@ -87,6 +92,11 @@ require(["js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (gc, a
                     }
 
                 })
+            } else {
+                for (var i in that.visshop) {
+                    num += parseInt(that.visshop[i].num);
+                }
+                that.cartNum.innerHTML = num;
             }
             let cook = getCookie.init({
                 key: "search"
@@ -120,6 +130,9 @@ require(["js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (gc, a
                 if (res) {
                     let num = 0;
                     that.req = JSON.parse(res)
+                    if (typeof that.req.shop == "string") {
+                        that.req.shop = JSON.parse(that.req.shop)
+                    }
                     for (var i in that.req.shop) {
                         num += parseInt(that.req.shop[i].num);
                     }

@@ -11,6 +11,7 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.visshop = JSON.parse(sessionStorage.getItem("visshop")) || [];
             this.showTk = document.querySelector(".show-tk");
             this.div = document.createElement("div");
             this.move = move;
@@ -154,13 +155,21 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
                     goodid: goodid,
                 }
             }).then((res) => {
+                let num = 0;
                 if (res) {
                     that.req = JSON.parse(res)
+                    if (typeof that.req.shop == "string") {
+                        that.req.shop = JSON.parse(that.req.shop)
+                    }
                     for (var i in that.req.shop) {
                         num += parseInt(that.req.shop[i].num);
                     }
-                    that.cartNum.innerHTML = num;
+                } else {
+                    for (var i in that.visshop) {
+                        num += parseInt(that.visshop[i].num);
+                    }
                 }
+                that.cartNum.innerHTML = num;
             })
             this.move.init({
                 dom: this.rside,
@@ -249,8 +258,8 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
                 }
             }
             this.addCart.onclick = function () {
+                let flag = 0;
                 let num = that.itemnumber.value;
-                console.log(num)
                 let ajax = aj;
                 let setcook = sc;
                 let arr = [];
@@ -261,7 +270,22 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
                 let cook = getCookie.init({
                     key: "goodId"
                 })
-                console.log(ajax.init)
+                if (token == "") {
+                    for (var i in that.visshop) {
+                        if (cook == that.visshop[i].goodid) {
+                            flag = 1;
+                            that.visshop[i].num = parseInt(that.visshop[i].num) + parseInt(num);
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        that.visshop.push({
+                            goodid: cook,
+                            num: num
+                        })
+                    }
+                    sessionStorage.setItem("visshop", JSON.stringify(that.visshop));
+                }
                 that.div.style.display = "block";
                 let clientX = document.documentElement.clientWidth;
                 let clientY = document.documentElement.clientHeight;
@@ -290,26 +314,34 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
                     end: function () {
                         that.div.setAttribute("style", "");
                         that.div.className = "divimg";
-                        ajax.init({
-                            url: that.cztUrl,
-                            data: {
-                                token: token,
-                                type: "addShop",
-                                goodid: cook,
-                                num: num
-                            }
-                        }).then((res) => {
+                        if (token != "") {
+                            ajax.init({
+                                url: that.cztUrl,
+                                data: {
+                                    token: token,
+                                    type: "addShop",
+                                    goodid: cook,
+                                    num: num
+                                }
+                            }).then((res) => {
+                                let num = 0;
+                                that.req = JSON.parse(res)
+                                for (var i in that.req.shop) {
+                                    num += parseInt(that.req.shop[i].num);
+                                }
+                                that.cartNum.innerHTML = num;
+                                that.showTk.style.display = "block";
+                                setTimeout(() => {
+                                    that.showTk.style.display = "none";
+                                }, 2000);
+                            })
+                        } else {
                             let num = 0;
-                            that.req = JSON.parse(res)
-                            for (var i in that.req.shop) {
-                                num += parseInt(that.req.shop[i].num);
+                            for (var i in that.visshop) {
+                                num += parseInt(that.visshop[i].num);
                             }
                             that.cartNum.innerHTML = num;
-                            that.showTk.style.display = "block";
-                            setTimeout(() => {
-                                that.showTk.style.display = "none";
-                            }, 2000);
-                        })
+                        }
                     }
                 })
             }

@@ -41,7 +41,8 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
             this.zongjia = 0;
             this.sumzong = document.querySelector(".zongjia");
             this.shopul = document.querySelector(".cart-table-list");
-            this.loginMes = document.querySelector(".login-message")
+            this.loginMes = document.querySelector(".login-message");
+            this.visshop = JSON.parse(sessionStorage.getItem("visshop")) || [];
             this.t1;
             this.t2;
             this.index = 0;
@@ -82,14 +83,19 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                             <s class="hi">Hi，</s>
                             <span id="member_name" class ="username">${str}</span>
                         </b>
-                        <a href="https://passport.bl.com/loginDisplay.html?type=logout">退出</a>
+                        <a class= "quit" >退出</a>
                         <b></b>
                         `;
+                        that.quit = document.querySelector(".quit");
+                        that.quit.onclick = function () {
+                            var d = new Date();
+                            d.setDate(d.getDate() - 1);
+                            document.cookie = "token = 1;Expires=" + d;
+                        }
                     }
 
                 })
             }
-
             ajax.init({
                 url: that.cztUrl,
                 data: {
@@ -101,6 +107,9 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                 let json = [];
                 if (res) {
                     that.req = JSON.parse(res)
+                    if (typeof that.req.shop == "string") {
+                        that.req.shop = JSON.parse(that.req.shop)
+                    }
                     for (var i in that.req.shop) {
                         that.num++;
                         json.push({
@@ -108,79 +117,81 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                             num: that.req.shop[i].num
                         })
                     }
-
                     that.name.innerHTML = `全部商品<span>${that.num}</span>`;
                     that.shopnum.innerHTML = that.num;
-                    ajax.init({
-                        url: that.cztUrl,
-                        data: {
-                            retr0: 1,
-                            json: "json/search.json"
-                        }
-                    }).then((res) => {
-                        let str = "";
-                        let num = -1;
-                        that.res = JSON.parse(res);
-                        for (var i in that.res[0].val) {
-                            for (var j in json) {
-                                if (that.res[0].val[i].goodId == json[j].goodid) {
-                                    num++;
-                                    let sum = that.res[0].val[i].price * json[j].num;
-                                    str += `   <li class="clear" style="background-color: #FFFAF1;">
-                                    <div id="pr-zh" class="item select">
-                                        <div class="cart-table-line">
-                                            <div class="chk-line">
-                                                <div index="${num}" class="checkbox chk goodsid_${that.res[0].val[i].goodId}" ></div>
+                } else {
+                    json = that.visshop;
+                }
+                console.log(json)
+                ajax.init({
+                    url: that.cztUrl,
+                    data: {
+                        retr0: 1,
+                        json: "json/search.json"
+                    }
+                }).then((res) => {
+                    let str = "";
+                    let num = -1;
+                    that.res = JSON.parse(res);
+                    for (var i in that.res[0].val) {
+                        for (var j in json) {
+                            if (that.res[0].val[i].goodId == json[j].goodid) {
+                                num++;
+                                let sum = that.res[0].val[i].price * json[j].num;
+                                str += `   <li class="clear" style="background-color: #FFFAF1;">
+                                            <div id="pr-zh" class="item select">
+                                                <div class="cart-table-line">
+                                                    <div class="chk-line">
+                                                        <div index="${num}" class="checkbox chk goodsid_${that.res[0].val[i].goodId}" ></div>
+                                                    </div>
+                                                    <div class="item-box"><a target="blank" href="http://product.bl.com/3246106.html"
+                                                            title="索尼（SONY）PlayStation 4 游戏手柄 水晶蓝（PS4）"> <img
+                                                                src="${that.res[0].val[i].img}"></a>
+                                                        <div class="name"><a target="blank" href="http://product.bl.com/3246106.html"
+                                                                title="索尼（SONY）PlayStation 4 游戏手柄 水晶蓝（PS4）"> ${that.res[0].val[i].name}
+                                                            </a></div>
+                                                        <div class="message-line"></div>
+                                                    </div>
+                                                    <div class="type-box"></div>
+                                                    <div class="item-price-box cc_cursor">
+                                                        <div class="aprice">¥${that.res[0].val[i].price}</div>
+                                                        <div class="icon"></div>
+                                                    </div>
+                                                    <div class="number-box">
+                                                        <div 
+                                                       class="input-line"><em class="reduce" 
+                                                       index = "${num}"id="reduce_${that.res[0].val[i].goodId}"
+                                                               >-</em> <input class="text"
+                                                                 type="text" value="${json[j].num}"> <em 
+                                                                 index = "${num}"class="add"
+                                                                id="add_${that.res[0].val[i].goodId}" >+</em></div>
+                                                    </div>
+                                                    <div class="price-box cc_cursor">
+                                                        <div class="price cc_cursor sumprice" index = "${num}"
+                                                        show = "1"    
+                                                        >¥${sum}</div>
+                                                    </div>
+                                                    <div class="action-box cc_cursor"><a class="add-favourite cc_pointer"
+                                                             >移入收藏夹</a> <br><a
+                                                            class="delete cc_pointer" index ="${i}" goodid="${that.res[0].val[i].goodId}" 
+                                                            >删除</a></div>
+                                                </div>
                                             </div>
-                                            <div class="item-box"><a target="blank" href="http://product.bl.com/3246106.html"
-                                                    title="索尼（SONY）PlayStation 4 游戏手柄 水晶蓝（PS4）"> <img
-                                                        src="${that.res[0].val[i].img}"></a>
-                                                <div class="name"><a target="blank" href="http://product.bl.com/3246106.html"
-                                                        title="索尼（SONY）PlayStation 4 游戏手柄 水晶蓝（PS4）"> ${that.res[0].val[i].name}
-                                                    </a></div>
-                                                <div class="message-line"></div>
-                                            </div>
-                                            <div class="type-box"></div>
-                                            <div class="item-price-box cc_cursor">
-                                                <div class="aprice">¥${that.res[0].val[i].price}</div>
-                                                <div class="icon"></div>
-                                            </div>
-                                            <div class="number-box">
-                                                <div 
-                                               class="input-line"><em class="reduce" 
-                                               index = "${num}"id="reduce_${that.res[0].val[i].goodId}"
-                                                       >-</em> <input class="text"
-                                                         type="text" value="${json[j].num}"> <em 
-                                                         index = "${num}"class="add"
-                                                        id="add_${that.res[0].val[i].goodId}" >+</em></div>
-                                            </div>
-                                            <div class="price-box cc_cursor">
-                                                <div class="price cc_cursor sumprice" index = "${num}"
-                                                show = "1"    
-                                                >¥${sum}</div>
-                                            </div>
-                                            <div class="action-box cc_cursor"><a class="add-favourite cc_pointer"
-                                                     >移入收藏夹</a> <br><a
-                                                    class="delete cc_pointer" index ="${i}" goodid="${that.res[0].val[i].goodId}" 
-                                                    >删除</a></div>
-                                        </div>
-                                    </div>
-                                </li>`;
-                                    that.zongjia += parseInt(sum);
+                                        </li>`;
+                                that.zongjia += parseInt(sum);
 
-                                }
                             }
                         }
-                        that.sumzong.innerHTML = that.zongjia;
-                        that.shopul.innerHTML = str;
-                        that.asum = document.querySelectorAll(".sumprice");
-                        that.aprice = document.querySelectorAll(".aprice")
-                        that.ckb = document.querySelectorAll(".checkbox");
-                        that.atext = document.querySelectorAll(".text");
-                        that.adelete = document.querySelectorAll(".delete");
-                        that.addEvent();
-                    })
-                }
+                    }
+                    that.sumzong.innerHTML = that.zongjia;
+                    that.shopul.innerHTML = str;
+                    that.asum = document.querySelectorAll(".sumprice");
+                    that.aprice = document.querySelectorAll(".aprice")
+                    that.ckb = document.querySelectorAll(".checkbox");
+                    that.atext = document.querySelectorAll(".text");
+                    that.adelete = document.querySelectorAll(".delete");
+                    that.addEvent();
+                })
 
             })
         }
@@ -196,17 +207,20 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                     that.changeMoney();
                     let ajax = aj;
                     let goodid = target.getAttribute("id").split("_")[1];
-                    ajax.init({
-                        url: that.cztUrl,
-                        data: {
-                            token: that.token,
-                            type: "changeShop",
-                            goodid: goodid,
-                            num: t
-                        }
-                    }).then((res) => {
-                        console.log(JSON.parse(res))
-                    })
+                    if (that.token) {
+                        ajax.init({
+                            url: that.cztUrl,
+                            data: {
+                                token: that.token,
+                                type: "changeShop",
+                                goodid: goodid,
+                                num: t
+                            }
+                        })
+                        // .then((res) => {
+                        //     console.log(JSON.parse(res))
+                        // })
+                    }
                 }
                 if (target.className == "add") {
                     var t = ++target.parentNode.children[1].value;
@@ -215,17 +229,20 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                     that.changeMoney();
                     let ajax = aj;
                     let goodid = target.getAttribute("id").split("_")[1];
-                    ajax.init({
-                        url: that.cztUrl,
-                        data: {
-                            token: that.token,
-                            type: "changeShop",
-                            goodid: goodid,
-                            num: t
-                        }
-                    }).then((res) => {
-                        console.log(JSON.parse(res))
-                    })
+                    if (that.token) {
+                        ajax.init({
+                            url: that.cztUrl,
+                            data: {
+                                token: that.token,
+                                type: "changeShop",
+                                goodid: goodid,
+                                num: t
+                            }
+                        })
+                        // .then((res) => {
+                        //     console.log(JSON.parse(res))
+                        // })
+                    }
                 }
             }
             for (var i = 0; i < that.ckb.length; i++) {
@@ -269,7 +286,9 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                         let json = [];
                         if (res) {
                             that.req = JSON.parse(res)
-                            console.log(that.req)
+                            if (typeof that.req.shop == "string") {
+                                that.req.shop = JSON.parse(that.req.shop)
+                            }
                             for (var i in that.req.shop) {
                                 that.num++;
                                 json.push({
@@ -277,7 +296,6 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                                     num: that.req.shop[i].num
                                 })
                             }
-
                             that.name.innerHTML = `全部商品<span>${that.num}</span>`;
                             that.shopnum.innerHTML = that.num;
                             ajax.init({

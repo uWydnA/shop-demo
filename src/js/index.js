@@ -10,6 +10,7 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.visshop = JSON.parse(sessionStorage.getItem("visshop")) || [];
             this.cartNum = document.querySelector("#cartNum");
             this.move = move;
             this.like = document.querySelector(".main-like");
@@ -35,10 +36,14 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
         }
         init() {
             let that = this;
+            let num = 0;
             let token = gc;
             let ajax = aj;
             let key = token.init({
                 key: "token"
+            });
+            let cook = token.init({
+                key: "goodId"
             });
             if (key) {
                 ajax.init({
@@ -48,31 +53,59 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                         token: key
                     }
                 }).then((res) => {
-                    that.res = JSON.parse(res);
-                    if (that.res.code == "21") {
-                        that.res = that.res.msg;
-                        let str = that.res.slice(0, 2);
-                        str += "**";
-                        str += that.res.slice(5, that.res.length);
-                        that.loginName.innerHTML = `
-                        <a href="https://my.bl.com/ym/nl/toIndex.html" target="_blank">
-                            <s class="hi">Hi，</s>
-                            <span id="member_name" class ="username">${str}</span>
-                        </b>
-                        <a href="https://passport.bl.com/loginDisplay.html?type=logout">退出</a>
-                        <b></b>
-                        `;
-                        that.remname.innerHTML = `
-                        Hi，<span id="memberName">${str}</span><br>
-                        <p class="blogin_a">
-                            <a href=";" style="display: none;">登录</a>
-                            <a href="https://reg.bl.com/regist.html" target="_blank" style="display: none;">注册</a>
-                            <a id="memberDetail">普通卡会员</a>
-                            <a id="getCoupon" href="https://coupon.bl.com/list.html" target="_blank">领券中心</a>
-                        </p>`;
+                    if (res) {
+                        that.res = JSON.parse(res);
+                        if (that.res.code == "21") {
+                            that.res = that.res.msg;
+                            let str = that.res.slice(0, 2);
+                            str += "**";
+                            str += that.res.slice(5, that.res.length);
+                            that.loginName.innerHTML = `
+                            <a href="https://my.bl.com/ym/nl/toIndex.html" target="_blank">
+                                <s class="hi">Hi，</s>
+                                <span id="member_name" class ="username">${str}</span>
+                            </b>
+                            <a href="https://passport.bl.com/loginDisplay.html?type=logout">退出</a>
+                            <b></b>
+                            `;
+                            that.remname.innerHTML = `
+                            Hi，<span id="memberName">${str}</span><br>
+                            <p class="blogin_a">
+                                <a href=";" style="display: none;">登录</a>
+                                <a href="https://reg.bl.com/regist.html" target="_blank" style="display: none;">注册</a>
+                                <a id="memberDetail">普通卡会员</a>
+                                <a id="getCoupon" href="https://coupon.bl.com/list.html" target="_blank">领券中心</a>
+                            </p>`;
+                        }
+                    }
+                })
+                ajax.init({
+                    url: this.cztUrl,
+                    data: {
+                        token: key,
+                        type: "showNum",
+                    }
+                }).then((res) => {
+                    let num = 0;
+                    if (res) {
+                        if (res) {
+                            that.req = JSON.parse(res)
+                            if (typeof that.req.shop == "string") {
+                                that.req.shop = JSON.parse(that.req.shop)
+                            }
+                            for (var i in that.req.shop) {
+                                num += parseInt(that.req.shop[i].num);
+                            }
+                            that.cartNum.innerHTML = num;
+                        }
                     }
 
                 })
+            } else {
+                for (var i in that.visshop) {
+                    num += parseInt(that.visshop[i].num);
+                }
+                that.cartNum.innerHTML = num;
             }
             this.getAjax(this.cztUrl, {
                 retr0: 1,
@@ -125,7 +158,7 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                             <img src="${that.res[i].img}" alt="">
                             <p class="info">${that.res[i].info}</p>
                             <span class="price">￥${that.res[i].price}</span>
-                            <a href="javascript:void(0);" goodsid="3865645" name="collect" class="geta">收藏</a>
+                            <a href="http://10.11.51.202:8888/search.html;" goodsid="3865645" name="collect" class="geta">收藏</a>
                         </div>
                     </li>`
                     }
@@ -159,25 +192,7 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                     });
                 }
             })
-            ajax.init({
-                url: this.cztUrl,
-                data: {
-                    token: key,
-                    type: "showNum",
-                }
-            }).then((res) => {
-                let num = 0;
-                if (res) {
-                    console.log(res)
-                    that.req = JSON.parse(res)
-                    for (var i in that.req.shop) {
-                        num += parseInt(that.req.shop[i].num);
-                    }
-                    that.cartNum.innerHTML = num;
-                    console.log(that.cartNum)
-                }
 
-            })
             this.move.init({
                 dom: this.rside,
                 data: {

@@ -125,6 +125,11 @@
     }
 }
 
+.fr {
+    display: flex;
+    justify-content: space-between;
+}
+
 #footer {
     padding-top: 30px;
 
