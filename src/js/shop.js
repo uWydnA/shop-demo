@@ -365,15 +365,20 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                                 that.ckb = document.querySelectorAll(".checkbox");
                                 that.atext = document.querySelectorAll(".text");
                                 that.adelete = document.querySelectorAll(".delete");
+                                that.changeMoney();
                                 that.addEvent();
                             })
                         }
+
                     })
+
                 }
             }
         }
         changeMoney() {
             let sum = 0;
+            this.asum = document.querySelectorAll(".sumprice");
+            console.log(this.asum)
             for (var i = 0; i < this.asum.length; i++) {
                 let flag = parseInt(this.asum[i].getAttribute("show"));
                 if (flag) {
