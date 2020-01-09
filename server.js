@@ -21,8 +21,8 @@ http.createServer((req, res) => {
             fsHandle(req, res);
         }
     }
-}).listen("8888", "127.0.0.2", () => {
-    console.log("run server at http://127.0.0.2:8888");
+}).listen("8888", "10.11.51.202", () => {
+    console.log("run server at http://10.11.51.202:8888");
 })
 
 function random(a, b) {
@@ -137,9 +137,8 @@ function ajaxHandle(req, res) {
         }
         if (data.type == "addShop") {
             let flag = 0;
-            let index;
-            let iNow;
-            let json = {};
+            let index = 0;
+            let iNow = -1;
             if (userMsg.length >= 1) {
                 for (var i in userMsg) {
                     if (data.token == userMsg[i].token) {
@@ -200,12 +199,84 @@ function ajaxHandle(req, res) {
                     }
                 }
             }
-            res.write(JSON.stringify(userShop[iNow]));
+            if (iNow >= 0) {
+                res.write(JSON.stringify(userShop[iNow]));
+            }
+            res.end();
+        }
+        if (data.type == "changeShop") {
+            let flag = 0;
+            let index = -1;
+            let iNow;
+            let json = {};
+            if (userMsg.length >= 1) {
+                for (var i in userMsg) {
+                    if (data.token == userMsg[i].token) {
+                        flag = 1;
+                        index = i;
+                    }
+                }
+                if (flag = 1) {
+                    let json = {};
+                    json.user = userMsg[index].user;
+                    json.goodid = data.goodid;
+                    json.num = data.num;
+                    if (userShop.length < 1) {
+                        userShop.push({
+                            user: json.user,
+                            shop: [{
+                                goodid: json.goodid,
+                                num: json.num
+                            }]
+                        })
+                        iNow = 0;
+                    } else {
+                        let flag = 0;
+                        let nameflag = 0;
+                        let index = 0;
+                        for (var j in userShop) {
+                            if (userShop[j].user == json.user) {
+                                nameflag = 1;
+                                index = j;
+                                iNow = j;
+                            }
+                        }
+                        if (nameflag) {
+                            let users = userShop[index].shop;
+                            for (var j in users) {
+                                if (users[j].goodid == json.goodid) {
+                                    flag = 1;
+                                    users[j].num = parseInt(json.num);
+                                }
+                            }
+                            if (!flag) {
+                                users.push({
+                                    goodid: json.goodid,
+                                    num: json.num
+                                })
+                            }
+                        } else {
+                            userShop.push({
+                                user: json.user,
+                                shop: [{
+                                    goodid: json.goodid,
+                                    num: json.num
+                                }]
+                            })
+                            iNow = userShop.length - 1;
+                        }
+
+                    }
+                }
+            }
+            if (iNow >= 0) {
+                res.write(JSON.stringify(userShop[iNow]));
+            }
             res.end();
         }
         if (data.type == "showNum") {
             let flag = 0;
-            let index = 0;
+            let index = -1;
             let shopindex;
             for (var i in userMsg) {
                 if (data.token == userMsg[i].token) {
@@ -213,7 +284,7 @@ function ajaxHandle(req, res) {
                     index = i;
                 }
             }
-            if (flag = 1) {
+            if (flag = 1 && index >= 0) {
                 let json = userMsg[index].user;
                 for (var i in userShop) {
                     if (json == userShop[i].user) {
@@ -226,6 +297,61 @@ function ajaxHandle(req, res) {
                     res.write(JSON.stringify(userShop[shopindex]));
                 }
             }
+            res.end();
+        }
+        if (data.type == "deleteShop") {
+            let flag = 0;
+            let index = 0;
+            let iNow = 0;
+            let json = {};
+            if (userMsg.length >= 1) {
+                for (var i in userMsg) {
+                    if (data.token == userMsg[i].token) {
+                        flag = 1;
+                        index = i;
+                    }
+                }
+                if (flag = 1) {
+                    let json = {};
+                    json.user = userMsg[index].user;
+                    json.goodid = data.goodid;
+                    json.num = data.num;
+                    if (userShop.length < 1) {
+                        userShop.push({
+                            user: json.user,
+                            shop: [{
+                                goodid: json.goodid,
+                                num: json.num
+                            }]
+                        })
+                        iNow = 0;
+                    } else {
+                        let flag = 0;
+                        let nameflag = 0;
+                        let index = 0;
+                        for (var j in userShop) {
+                            if (userShop[j].user == json.user) {
+                                nameflag = 1;
+                                index = j;
+                                iNow = j;
+                            }
+                        }
+                        if (nameflag) {
+                            let users = userShop[index].shop;
+                            console.log(users)
+                            for (var j in users) {
+                                if (users[j].goodid == json.goodid) {
+                                    flag = 1;
+                                    users.splice(j, 1);
+                                    break;
+                                }
+                            }
+                            console.log(users)
+                        }
+                    }
+                }
+            }
+            res.write(JSON.stringify(userShop[iNow]));
             res.end();
         }
 
