@@ -30,6 +30,11 @@ define([], function () {
                     }
                     that.displayBanner();
                 }
+
+            }
+            this.dom.children[2].onmouseover = function (eve) {
+                let e = eve || window.event;
+                let target = e.targer || e.srcElement;
                 if (target.className == "circle" || target.className == "active circle") {
                     that.index = (target.getAttribute("index"));
                     that.displayBanner();

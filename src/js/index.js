@@ -252,6 +252,7 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                 this.style.display = "none";
             }
             onscroll = function (eve) {
+
                 var e = eve || window.event;
                 let t = that.mainczt.offsetTop;
                 let t1 = that.like.offsetTop;
@@ -279,17 +280,26 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
 
             this.floor.children[0].onclick = function () {
                 let speed;
+                let flag;
+                let prespeed;
                 clearInterval(this.t1)
                 clearInterval(that.floor.children[1].t2)
                 this.t1 = setInterval(() => {
-                    speed = Math.abs((that.mainczt.offsetTop - document.documentElement.scrollTop) / 20);
+                    prespeed = speed ? speed : 0;
+                    speed = Math.abs((that.mainczt.offsetTop - document.documentElement.scrollTop) / 30);
                     speed = speed < 1 ? 1 : speed;
-                    console.log(speed)
                     if (document.documentElement.scrollTop > that.mainczt.offsetTop) {
+                        flag = 1;
                         document.documentElement.scrollTop -= speed;
                     } else {
+                        flag = 0
                         document.documentElement.scrollTop += speed;
                     }
+                    if (prespeed < speed && prespeed) {
+                        clearInterval(this.t1)
+                        clearInterval(that.floor.children[1].t2)
+                    }
+                    // console.log("prev:" + prespeed + "," + "speed:" + speed)
                     if (Math.abs(that.mainczt.offsetTop - document.documentElement.scrollTop) <= speed) {
                         document.documentElement.scrollTop = that.mainczt.offsetTop
                         clearInterval(this.t1)
@@ -301,13 +311,22 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
             }
             this.floor.children[1].onclick = function () {
                 let speed;
+                let prespeed;
                 clearInterval(that.floor.children[0].t1)
                 clearInterval(this.t2)
                 this.t2 = setInterval(() => {
-                    speed = (that.like.offsetTop - document.documentElement.scrollTop) / 20;
+                    prespeed = speed ? speed : 0;
+                    speed = Math.abs(that.like.offsetTop - document.documentElement.scrollTop) / 30;
                     speed = speed < 1 ? 1 : speed;
-                    document.documentElement.scrollTop += speed;
-                    if (that.like.offsetTop - document.documentElement.scrollTop <= speed) {
+                    if (document.documentElement.scrollTop > that.like.offsetTop) {
+                        document.documentElement.scrollTop -= speed;
+                    } else {
+                        document.documentElement.scrollTop += speed;
+                    }
+                    if (prespeed < speed && prespeed) {
+                        clearInterval(this.t2)
+                    }
+                    if (Math.abs(that.like.offsetTop - document.documentElement.scrollTop) <= speed) {
                         document.documentElement.scrollTop = that.like.offsetTop
                         clearInterval(this.t2)
                     }
