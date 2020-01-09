@@ -37,6 +37,7 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
             this.mainPic = document.querySelector("#mainPic");
             this.reduce = document.querySelector("#reduce");
             this.addnum = document.querySelector("#addnum");
+            this.rside = document.querySelector("#rside");
             this.t1;
             this.t2;
             this.index = 0;
@@ -157,6 +158,12 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
                     num += parseInt(that.req.shop[i].num);
                 }
                 that.cartNum.innerHTML = num;
+            })
+            this.move.init({
+                dom: this.rside,
+                data: {
+                    right: -276
+                }
             })
         }
         addEvent() {

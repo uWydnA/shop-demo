@@ -1271,3 +1271,330 @@
         background: #f3f3f3;
     }
 }
+
+.right-slidebar {
+    width: 314px;
+    position: fixed;
+    right: -319px;
+    top: 0;
+    color: #fff;
+    z-index: 1111111;
+}
+
+#rsidein {
+    background: #333;
+}
+
+#nosidederty {
+    background: #333;
+}
+
+#rsidein>div {
+    cursor: pointer;
+}
+
+.login {
+    font-size: 12px;
+    position: absolute;
+    top: 100px;
+    z-index: 99;
+}
+
+.sidecss {
+    height: 40px;
+    font-size: 12px;
+    width: 38px;
+    background: #333;
+    text-align: center;
+    margin: 2px 0;
+    line-height: 40px;
+    transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+}
+
+.history i {
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_out.png) no-repeat 0 -80px;
+}
+
+.service {
+    position: absolute;
+    top: 500px;
+}
+
+.qrcode i {
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_out.png) no-repeat 0 -200px;
+}
+
+.service i {
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_out.png) no-repeat 0 -240px;
+}
+
+.mui-mbar-tab-tip {
+    opacity: 1;
+    display: none;
+    position: absolute;
+    width: 0;
+    line-height: 40px;
+    right: 38px;
+    top: -17px;
+    border: 1px solid #DDD;
+    color: #000;
+    background-color: #FFF;
+    overflow: hidden;
+    cursor: default;
+    border-top-left-radius: 8%;
+    border-bottom-left-radius: 8%;
+}
+
+.shopcar {
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+    height: 174px;
+    position: absolute;
+    top: 160px;
+    width: 43px;
+    right: 0;
+    z-index: 99999;
+    background-color: #333;
+    font-family: 'Microsoft YaHei';
+}
+
+.collection {
+    position: absolute;
+    top: 330px;
+    z-index: 98;
+}
+
+.history {
+    position: absolute;
+    top: 390px;
+    z-index: 97;
+}
+
+.suggest {
+    position: absolute;
+    top: 400px;
+    display: none;
+}
+
+.sidecss {
+    height: 40px;
+    font-size: 12px;
+    width: 38px;
+    background: #333;
+    text-align: center;
+    margin: 2px 0;
+    line-height: 40px;
+    transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+}
+
+.qrcode {
+    position: absolute;
+    top: 450px;
+}
+
+.activity {
+    font-size: 12px;
+    position: absolute;
+    top: 60px;
+    z-index: 99;
+    display: none;
+}
+
+.mui-mbar-tab-normal-arr {
+    position: absolute;
+    top: 14px;
+    right: 0;
+    display: none;
+    width: 6px;
+    height: 12px;
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_in.png) no-repeat 0 -108px;
+    border: 0;
+}
+
+.mui-mbar-tab {
+    position: relative;
+    z-index: 999;
+    top: 15px;
+}
+
+.login i {
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_out.png) no-repeat 0 0;
+}
+
+.shopcar i {
+    width: 24px;
+    height: 18px;
+    margin-top: 36px;
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_out.png) no-repeat 0 -365px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.shopcar span {
+    margin-top: 10px;
+    line-height: 15px;
+    display: block;
+    font-size: 14px;
+}
+
+.shopcar b {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e6133c;
+    text-align: center;
+    display: block;
+    line-height: 18px;
+    color: #FFF;
+    margin-top: 10px;
+}
+
+b {
+    font-weight: bold;
+}
+
+.mui-mbar-tab-normal-arr {
+    position: absolute;
+    top: 14px;
+    right: 0;
+    display: none;
+    width: 6px;
+    height: 12px;
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_in.png) no-repeat 0 -108px;
+    border: 0;
+}
+
+.mui-mbar-tab-tip {
+    opacity: 1;
+    display: none;
+    position: absolute;
+    width: 0;
+    line-height: 40px;
+    right: 38px;
+    top: -17px;
+    border: 1px solid #DDD;
+    color: #000;
+    background-color: #FFF;
+    overflow: hidden;
+    cursor: default;
+    border-top-left-radius: 8%;
+    border-bottom-left-radius: 8%;
+}
+
+.mui-mbar-tab-tip .tip_con {
+    width: 86px;
+    font-size: 14px;
+    color: #333;
+    font-family: 'Microsoft YaHei';
+}
+
+.right-slidebar-main>div:hover {
+    background-color: #e6133c;
+}
+
+.collection i {
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_out.png) no-repeat 0 -40px;
+}
+
+.mui-mbar-tab-tip-arr {
+    position: absolute;
+    top: 15px;
+    right: -6px;
+    width: 6px;
+    height: 12px;
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_in.png) no-repeat -6px -108px;
+}
+
+.mui-mbar-tab {
+    position: relative;
+    z-index: 999;
+    top: 15px;
+}
+
+.cartbar_co {
+    width: 43px;
+    height: 5px;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_out.png) no-repeat 0 -360px;
+}
+
+.mui-mbar-tab-cart-arr {
+    position: absolute;
+    top: 82px;
+    right: 0;
+    z-index: 999990;
+    width: 6px;
+    height: 12px;
+    display: none;
+    background: url(//img.iblimg.com/respc-1/resources/v4.2/widget/sidebar/i/sidebar_in.png) no-repeat 0 -108px;
+}
+
+.sidecss i {
+    width: 38px;
+    height: 40px;
+    float: left;
+    display: inline;
+}
+
+.totop {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 38px;
+    height: 40px;
+    text-align: center;
+    background: #333;
+    line-height: 40px;
+    display: none;
+}
+
+.sidecss {
+    height: 40px;
+    font-size: 12px;
+    width: 38px;
+    background: #333;
+    text-align: center;
+    margin: 2px 0;
+    line-height: 40px;
+    transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+}
+
+.right-slidebar-main {
+    width: 38px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #333;
+    z-index: 999999;
+    height: 100%;
+}
+
+.divimg {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 350px;
+    top: 650px;
+    z-index: 999999999999;
+    display: none;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}

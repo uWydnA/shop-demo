@@ -10,9 +10,12 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.cartNum = document.querySelector("#cartNum");
             this.move = move;
             this.like = document.querySelector(".main-like");
             this.menudata = document.querySelector("div #menuData");
+            this.rside = document.querySelector("#rside");
+            this.shopcar = document.querySelector(".shopcar");
             this.mainczt = document.querySelector(".main-czt");
             this.topbox = document.querySelector("#navbox");
             this.select = document.querySelector(".select");
@@ -33,11 +36,11 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
         init() {
             let that = this;
             let token = gc;
+            let ajax = aj;
             let key = token.init({
                 key: "token"
             });
             if (key) {
-                let ajax = aj;
                 ajax.init({
                     url: that.cztUrl,
                     data: {
@@ -156,7 +159,27 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                     });
                 }
             })
-
+            ajax.init({
+                url: this.cztUrl,
+                data: {
+                    token: token,
+                    type: "showNum",
+                }
+            }).then((res) => {
+                let num = 0;
+                that.req = JSON.parse(res)
+                for (var i in that.req.shop) {
+                    num += parseInt(that.req.shop[i].num);
+                }
+                that.cartNum.innerHTML = num;
+                console.log(that.cartNum)
+            })
+            this.move.init({
+                dom: this.rside,
+                data: {
+                    right: -276
+                }
+            })
         }
         addEvent() {
             var that = this;
@@ -272,6 +295,9 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                         clearInterval(this.t1)
                     }
                 }, 13);
+            }
+            this.shopcar.onclick = function () {
+                location.assign("shop.html")
             }
             this.floor.children[1].onclick = function () {
                 let speed;

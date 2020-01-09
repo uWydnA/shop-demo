@@ -121,7 +121,6 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                     let num = -1;
                     that.res = JSON.parse(res);
                     for (var i in that.res[0].val) {
-
                         for (var j in json) {
                             if (that.res[0].val[i].goodId == json[j].goodid) {
                                 num++;
@@ -190,8 +189,6 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
 
                     var t = target.parentNode.children[1].value >= 2 ? target.parentNode.children[1].value-- : target.parentNode.children[1].value;
                     var index = target.getAttribute("index");
-                    console.log(index);
-                    console.log(that.asum[index])
                     that.asum[index].innerHTML = `￥${target.parentNode.children[1].value * parseInt(that.aprice[index].innerHTML.slice(1, that.aprice[index].innerHTML.length - 1))}`;
                     that.changeMoney();
 

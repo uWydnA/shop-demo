@@ -1,4 +1,4 @@
-require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
+require(["js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (gc, aj, sc, move) {
     class Search {
         constructor() {
             this.cztUrl = "http://127.0.0.2:8888/api";
@@ -11,10 +11,14 @@ require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.move = move;
+            this.shopcar = document.querySelector(".shopcar");
+            this.cartNum = document.querySelector("#cartNum");
             this.listclass = document.querySelector(".listclass");
             this.navli = document.querySelectorAll(".navli");
             this.selectbg = document.querySelector(".selectbg");
             this.menudata = document.querySelector("div #menuData");
+            this.rside = document.querySelector("#rside");
             this.topbox = document.querySelector("#navbox");
             this.select = document.querySelector(".select");
             this.ali = document.querySelectorAll(".selectli");
@@ -66,6 +70,20 @@ require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
                     }
 
                 })
+                ajax.init({
+                    url: this.cztUrl,
+                    data: {
+                        token: key,
+                        type: "showNum",
+                    }
+                }).then((res) => {
+                    let num = 0;
+                    that.req = JSON.parse(res)
+                    for (var i in that.req.shop) {
+                        num += parseInt(that.req.shop[i].num);
+                    }
+                    that.cartNum.innerHTML = num;
+                })
             }
             let cook = getCookie.init({
                 key: "search"
@@ -89,7 +107,26 @@ require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
                 that.rec = that.res;
                 that.display();
             })
-
+            ajax.init({
+                url: this.cztUrl,
+                data: {
+                    token: key,
+                    type: "showNum",
+                }
+            }).then((res) => {
+                let num = 0;
+                that.req = JSON.parse(res)
+                for (var i in that.req.shop) {
+                    num += parseInt(that.req.shop[i].num);
+                }
+                that.cartNum.innerHTML = num;
+            })
+            this.move.init({
+                dom: this.rside,
+                data: {
+                    right: -276
+                }
+            })
         }
         addEvent() {
             var that = this;
@@ -115,6 +152,9 @@ require(["js/getCookies", "js/ajax", "js/setCookie"], function (gc, aj, sc) {
                     that.select.style.display = "none";
                     that.selectbg.style.display = "none";
                 }
+            }
+            this.shopcar.onclick = function () {
+                location.assign("shop.html")
             }
             this.menudata.onmouseover = function () {
                 this.style.display = "block";
