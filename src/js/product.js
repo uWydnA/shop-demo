@@ -1,7 +1,7 @@
 require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc, aj, move, sc) {
     class Product {
         constructor() {
-            this.cztUrl = "http://127.0.0.2:8888/api";
+            this.cztUrl = "http://10.11.51.202:8888/api";
             this.title = document.querySelector("head title")
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
@@ -11,6 +11,7 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
             this.top = document.querySelector("#navigation");
             this.remname = document.querySelector(".ban_tit_txd");
             this.loginName = document.querySelector("#tool .tool-r ul li");
+            this.showTk = document.querySelector(".show-tk");
             this.div = document.createElement("div");
             this.move = move;
             this.cartNum = document.querySelector("#cartNum");
@@ -153,11 +154,13 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
                     goodid: goodid,
                 }
             }).then((res) => {
-                that.req = JSON.parse(res)
-                for (var i in that.req.shop) {
-                    num += parseInt(that.req.shop[i].num);
+                if (res) {
+                    that.req = JSON.parse(res)
+                    for (var i in that.req.shop) {
+                        num += parseInt(that.req.shop[i].num);
+                    }
+                    that.cartNum.innerHTML = num;
                 }
-                that.cartNum.innerHTML = num;
             })
             this.move.init({
                 dom: this.rside,
@@ -302,6 +305,10 @@ require(["js/getCookies", "js/ajax", "js/move", "js/setCookie", ], function (gc,
                                 num += parseInt(that.req.shop[i].num);
                             }
                             that.cartNum.innerHTML = num;
+                            that.showTk.style.display = "block";
+                            setTimeout(() => {
+                                that.showTk.style.display = "none";
+                            }, 2000);
                         })
                     }
                 })

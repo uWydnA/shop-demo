@@ -1,7 +1,7 @@
 require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (swiper, gc, aj, sc, move) {
     class Shop {
         constructor() {
-            this.cztUrl = "http://127.0.0.2:8888/api";
+            this.cztUrl = "http://10.11.51.202:8888/api";
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
             this.bol = document.querySelector(".progress-bar-ol")
@@ -162,17 +162,21 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
             ajax.init({
                 url: this.cztUrl,
                 data: {
-                    token: token,
+                    token: key,
                     type: "showNum",
                 }
             }).then((res) => {
                 let num = 0;
-                that.req = JSON.parse(res)
-                for (var i in that.req.shop) {
-                    num += parseInt(that.req.shop[i].num);
+                if (res) {
+                    console.log(res)
+                    that.req = JSON.parse(res)
+                    for (var i in that.req.shop) {
+                        num += parseInt(that.req.shop[i].num);
+                    }
+                    that.cartNum.innerHTML = num;
+                    console.log(that.cartNum)
                 }
-                that.cartNum.innerHTML = num;
-                console.log(that.cartNum)
+
             })
             this.move.init({
                 dom: this.rside,

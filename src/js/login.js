@@ -42,7 +42,7 @@ require(["js/ajax", "js/setCookie"], function (getp, gc) {
                 if (str == 2) {
                     let ajax = getp;
                     ajax.init({
-                        url: "http://127.0.0.2:8888/api",
+                        url: "http://10.11.51.202:8888/api",
                         data: {
                             type: "login",
                             user: that.user.value,
