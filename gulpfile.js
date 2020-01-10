@@ -88,4 +88,4 @@ function sassFn() {
 exports.index = indexFn;
 exports.watch = watchFn;
 // exports.server = serverFn;
-// exports.serverWatch = gulp.parallel(serverFn, watchFn)
+exports.is = gulp.parallel(indexFn, sassFn)
