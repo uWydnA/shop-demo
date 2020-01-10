@@ -44,7 +44,7 @@ require(["js/ajax", "js/setCookie", "js/getCookies"], function (getp, gc, g) {
                 if (str == 2) {
                     let ajax = getp;
                     ajax.init({
-                        url: "http://10.11.51.202:8888/api",
+                        url: "http://127.0.0.2:8888/api",
                         data: {
                             type: "login",
                             user: that.user.value,
@@ -67,7 +67,7 @@ require(["js/ajax", "js/setCookie", "js/getCookies"], function (getp, gc, g) {
 
                             if (that.visshop.length >= 1) {
                                 that.ajax.init({
-                                    url: "http://10.11.51.202:8888/api",
+                                    url: "http://127.0.0.2:8888/api",
                                     data: {
                                         token: token,
                                         type: "firstPush",

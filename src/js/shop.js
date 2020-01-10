@@ -1,7 +1,7 @@
 require(["js/ajax", "js/getCookies"], function (aj, gc) {
     class Shop {
         constructor() {
-            this.cztUrl = "http://10.11.51.202:8888/api";
+            this.cztUrl = "http://127.0.0.2:8888/api";
             this.title = document.querySelector("head title")
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
@@ -122,7 +122,6 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                 } else {
                     json = that.visshop;
                 }
-                console.log(json)
                 ajax.init({
                     url: that.cztUrl,
                     data: {
@@ -273,6 +272,15 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                     // this.className = arr.join(" ");
                 }
                 that.adelete[i].onclick = function () {
+                    if (that.token == "") {
+                        for (var i = 0; i < that.visshop.length; i++) {
+                            if (that.visshop[i].goodid == this.getAttribute("goodid")) {
+                                that.visshop.splice(i, 1);
+                                break;
+                            }
+                        }
+                        sessionStorage.setItem("visshop", JSON.stringify(that.visshop));
+                    }
                     let ajax = aj;
                     ajax.init({
                         url: that.cztUrl,
@@ -284,6 +292,7 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                         }
                     }).then((res) => {
                         let json = [];
+
                         if (res) {
                             that.req = JSON.parse(res)
                             if (typeof that.req.shop == "string") {
@@ -298,22 +307,26 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                             }
                             that.name.innerHTML = `全部商品<span>${that.num}</span>`;
                             that.shopnum.innerHTML = that.num;
-                            ajax.init({
-                                url: that.cztUrl,
-                                data: {
-                                    retr0: 1,
-                                    json: "json/search.json"
-                                }
-                            }).then((res) => {
-                                let str = "";
-                                let num = -1;
-                                that.res = JSON.parse(res);
-                                for (var i in that.res[0].val) {
-                                    for (var j in json) {
-                                        if (that.res[0].val[i].goodId == json[j].goodid) {
-                                            num++;
-                                            let sum = that.res[0].val[i].price * json[j].num;
-                                            str += `   <li class="clear" style="background-color: #FFFAF1;">
+                        }
+                        ajax.init({
+                            url: that.cztUrl,
+                            data: {
+                                retr0: 1,
+                                json: "json/search.json"
+                            }
+                        }).then((res) => {
+                            let str = "";
+                            let num = -1;
+                            that.res = JSON.parse(res);
+                            if (that.token == "") {
+                                json = that.visshop;
+                            }
+                            for (var i in that.res[0].val) {
+                                for (var j in json) {
+                                    if (that.res[0].val[i].goodId == json[j].goodid) {
+                                        num++;
+                                        let sum = that.res[0].val[i].price * json[j].num;
+                                        str += `   <li class="clear" style="background-color: #FFFAF1;">
                                             <div id="pr-zh" class="item select">
                                                 <div class="cart-table-line">
                                                     <div class="chk-line">
@@ -353,22 +366,22 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
                                                 </div>
                                             </div>
                                         </li>`;
-                                            that.zongjia += parseInt(sum);
+                                        that.zongjia += parseInt(sum);
 
-                                        }
                                     }
                                 }
-                                that.sumzong.innerHTML = that.zongjia;
-                                that.shopul.innerHTML = str;
-                                that.asum = document.querySelectorAll(".sumprice");
-                                that.aprice = document.querySelectorAll(".aprice")
-                                that.ckb = document.querySelectorAll(".checkbox");
-                                that.atext = document.querySelectorAll(".text");
-                                that.adelete = document.querySelectorAll(".delete");
-                                that.changeMoney();
-                                that.addEvent();
-                            })
-                        }
+                            }
+                            that.sumzong.innerHTML = that.zongjia;
+                            that.shopul.innerHTML = str;
+                            that.asum = document.querySelectorAll(".sumprice");
+                            that.aprice = document.querySelectorAll(".aprice")
+                            that.ckb = document.querySelectorAll(".checkbox");
+                            that.atext = document.querySelectorAll(".text");
+                            that.adelete = document.querySelectorAll(".delete");
+                            that.changeMoney();
+                            that.addEvent();
+                        })
+
 
                     })
 
@@ -378,7 +391,6 @@ require(["js/ajax", "js/getCookies"], function (aj, gc) {
         changeMoney() {
             let sum = 0;
             this.asum = document.querySelectorAll(".sumprice");
-            console.log(this.asum)
             for (var i = 0; i < this.asum.length; i++) {
                 let flag = parseInt(this.asum[i].getAttribute("show"));
                 if (flag) {

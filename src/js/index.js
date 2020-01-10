@@ -1,7 +1,7 @@
-require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], function (swiper, gc, aj, sc, move) {
+require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move", "js/loadsrc"], function (swiper, gc, aj, sc, move, load) {
     class Shop {
         constructor() {
-            this.cztUrl = "http://10.11.51.202:8888/api";
+            this.cztUrl = "http://127.0.0.2:8888/api";
             this.banner = document.querySelector("#banner");
             this.bul = document.querySelector("#banner .ben ul")
             this.bol = document.querySelector(".progress-bar-ol")
@@ -13,6 +13,7 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
             this.visshop = JSON.parse(sessionStorage.getItem("visshop")) || [];
             this.cartNum = document.querySelector("#cartNum");
             this.move = move;
+            this.load = load;
             this.like = document.querySelector(".main-like");
             this.menudata = document.querySelector("div #menuData");
             this.rside = document.querySelector("#rside");
@@ -155,14 +156,19 @@ require(["js/swiper", "js/getCookies", "js/ajax", "js/setCookie", "js/move"], fu
                         str += ` 
                         <li>
                         <div>
-                            <img src="${that.res[i].img}" alt="">
+                            <img datasrc="${that.res[i].img}" alt="">
                             <p class="info">${that.res[i].info}</p>
                             <span class="price">￥${that.res[i].price}</span>
-                            <a href="http://10.11.51.202:8888/search.html;" goodsid="3865645" name="collect" class="geta">收藏</a>
+                            <a href="http://127.0.0.2:8888/search.html;" goodsid="3865645" name="collect" class="geta">收藏</a>
                         </div>
                     </li>`
                     }
                     that.likething.innerHTML = str;
+                    that.loadli = document.querySelectorAll(".likething li");
+                    that.load.init({
+                        dom: that.loadli
+                    })
+
                 }
             })
             this.getAjax(this.cztUrl, {
