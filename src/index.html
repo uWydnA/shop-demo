@@ -8,6 +8,11 @@
     <title>百联网上商城-全渠道电商网站（BL.COM）-正品低价、品质保障、货到付款、配送及时、放心服务、轻松购物！</title>
     <link rel="stylesheet" href="css/public.css">
     <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript">
+        window.logInfo = {};
+        window.logInfo.openTime = performance.timing.navigationStart;
+        window.logInfo.whiteScreenTime = +new Date() - window.logInfo.openTime;
+    </script>
 </head>
 
 <body>
@@ -4019,6 +4024,71 @@
                 </ul>
             </div>
         </div>
+        <script type="text/javascript">
+            (function logFirstScreen() {
+                var images = document.getElementsByTagName('img');
+                var iLen = images.length;
+                var curMax = 0;
+                var inScreenLen = 0;
+                // 图片的加载回调
+                function imageBack() {
+                    this.removeEventListener &&
+                        this.removeEventListener('load', imageBack, !1);
+                    if (++curMax === inScreenLen) {
+                        // 如果所有在首屏的图片均已加载完成了的话，发送日志
+                        log();
+                    }
+                }
+                // 对于所有的位于指定区域的图片，绑定回调事件
+                for (var s = 0; s < iLen; s++) {
+                    var img = images[s];
+                    var offset = {
+                        top: 0
+                    };
+                    var curImg = img;
+                    while (curImg.offsetParent) {
+                        offset.top += curImg.offsetTop;
+                        curImg = curImg.offsetParent;
+                    }
+                    // 判断图片在不在首屏
+                    if (document.documentElement.clientHeight < offset.top) {
+                        continue;
+                    }
+                    // 图片还没有加载完成的话
+                    if (!img.complete) {
+                        inScreenLen++;
+                        img.addEventListener('load', imageBack, !1);
+                    }
+                }
+                // 如果首屏没有图片的话，直接发送日志
+                if (inScreenLen === 0) {
+                    log();
+                }
+                // 发送日志进行统计
+                function log() {
+                    window.logInfo.firstScreen = +new Date() - window.logInfo.openTime;
+                }
+            })();
+            document
+                .addEventListener(
+                    'DOMContentLoaded',
+                    function (event) {
+                        window.logInfo.readyTime = +new Date() - window.logInfo.openTime;
+                    }
+                );
+            window.onload = function () {
+                window.logInfo.allloadTime = +new Date() - window.logInfo.openTime;
+                var timname = {
+                    whiteScreenTime: '白屏时间',
+                    firstScreen: '首屏时间',
+                    readyTime: '用户可操作时间',
+                    allloadTime: '总下载时间'
+                };
+                for (var i in timname) {
+                    console.log(timname[i] + ':' + window.logInfo[i] + 'ms');
+                }
+            };
+        </script>
         <div class="main-tm clear">
             <div class="tm-l">
                 <a href="#">
